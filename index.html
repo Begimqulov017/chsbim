@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CHSB_PRO — 9-sinf test platformasi</title>
+<style>
+:root{--bg:#0f1220;--card:#181c30;--card2:#20253d;--tx:#eef0fa;--mu:#9aa1c2;--bd:#2c3253;--ok:#22c55e;--no:#ef4444;--ac:#6c8cff}
+@media(prefers-color-scheme:light){:root{--bg:#f3f5fb;--card:#fff;--card2:#eef1fa;--tx:#151a33;--mu:#5d6585;--bd:#dde2f0}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button{font:inherit;cursor:pointer;color:inherit}a{color:var(--ac)}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--bg);z-index:5}
+.logo{font-weight:800;font-size:20px;letter-spacing:.5px;cursor:pointer}.logo b{color:var(--ac)}
+.user{display:flex;gap:10px;align-items:center;color:var(--mu);font-size:14px}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 18px;font-weight:600}.btn.g{background:var(--card2);color:var(--tx);border:1px solid var(--bd)}.btn:disabled{opacity:.4;cursor:default}
+main{max-width:1050px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:30px;margin:6px 0 4px}h2{font-size:20px;margin:28px 0 12px}.sub{color:var(--mu);margin:0 0 20px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px}
+.subj{position:relative;overflow:hidden}.subj:before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--c)}
+.subj .ic{font-size:34px}.subj h3{margin:6px 0 2px;font-size:22px}.subj .meta{color:var(--mu);font-size:14px;margin-bottom:14px}
+.subj .top{border-top:1px solid var(--bd);margin-top:14px;padding-top:10px;font-size:14px}
+.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0}.row span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mu{color:var(--mu)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.v{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;text-align:left;transition:.15s}.v:hover{transform:translateY(-2px);border-color:var(--c)}
+.v b{font-size:18px}.v small{display:block;color:var(--mu)}.v .best{margin-top:6px;font-weight:600;color:var(--c)}
+table{width:100%;border-collapse:collapse}th,td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--bd);font-size:15px}th{color:var(--mu);font-weight:600;font-size:13px}
+select{background:var(--card2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:7px 10px;font:inherit}
+.qwrap{display:grid;grid-template-columns:1fr 250px;gap:16px}@media(max-width:800px){.qwrap{grid-template-columns:1fr}}
+.qimg{background:#fff;border-radius:12px;padding:6px;overflow-x:auto}.qimg img{display:block;width:100%;min-width:520px;height:auto}
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}@media(max-width:520px){.opts{grid-template-columns:repeat(2,1fr)}}
+.o{padding:14px;border-radius:12px;background:var(--card2);border:2px solid var(--bd);font-weight:700;font-size:18px}.o.sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card2))}
+.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.nav button{aspect-ratio:1;border-radius:9px;border:1px solid var(--bd);background:var(--card2);font-weight:600}.nav .ans{background:var(--ac);color:#fff;border-color:var(--ac)}.nav .cur{outline:2px solid var(--tx)}
+.bar{height:6px;background:var(--card2);border-radius:9px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;background:var(--ac)}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;font-size:20px}.timer.low{color:var(--no)}
+.score{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--ac) calc(var(--p)*1%),var(--card2) 0)}.ring div{width:118px;height:118px;border-radius:50%;background:var(--card);display:grid;place-items:center;text-align:center;font-size:28px;font-weight:800;line-height:1.1}.ring small{display:block;font-size:13px;color:var(--mu);font-weight:500}
+.stats{display:flex;gap:12px;flex-wrap:wrap}.st{background:var(--card2);border-radius:12px;padding:10px 16px}.st b{display:block;font-size:22px}
+.ri{border:1px solid var(--bd);border-radius:12px;margin:8px 0;overflow:hidden;background:var(--card)}.ri>button{width:100%;display:flex;gap:12px;align-items:center;background:none;border:0;padding:12px 14px;text-align:left}
+.ri.ok{border-left:5px solid var(--ok)}.ri.bad{border-left:5px solid var(--no)}.ri.skip{border-left:5px solid var(--mu)}.ri .body{padding:0 14px 14px;display:none}.ri.open .body{display:block}
+.pill{padding:2px 10px;border-radius:99px;font-size:13px;font-weight:700}.pill.ok{background:#22c55e33;color:var(--ok)}.pill.bad{background:#ef444433;color:var(--no)}
+.warn{background:#f59e0b22;border:1px solid #f59e0b;border-radius:12px;padding:10px 14px;margin:12px 0}
+.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:20;padding:16px}.modal .card{max-width:400px;width:100%}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--bd);background:var(--card2);color:var(--tx);font:inherit;margin:6px 0 12px}
+.medal{display:inline-block;width:26px}
+.crumb{color:var(--mu);font-size:14px;margin-bottom:6px;cursor:pointer}
+</style></head><body>
+<header><div class="logo" onclick="go('')">CHSB<b>_PRO</b> <span class="mu" style="font-weight:500;font-size:14px">9-sinf</span></div><div class="user" id="user"></div></header>
+<main id="app"></main>
+<script>
+const SUB={fizika:{n:'Fizika',ic:'⚛️',c:'#4f8cff',min:40},matematika:{n:'Matematika',ic:'📐',c:'#a855f7',min:45},ingliz:{n:'Ingliz tili',ic:'🇬🇧',c:'#f59e0b',min:45}};
+const UNVER={matematika:['demo']};            // javob kaliti PDFda to'liq emas
+const $=s=>document.querySelector(s),app=$('#app');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const vname=v=>v==='demo'?'Demo variant':v+'-variant';
+let user=JSON.parse(localStorage.getItem('chsb_user')||'null'),DATA={},RES={},T=null,tick=null;
+const fmt=x=>(Math.round(x*10)/10).toString().replace('.',',');
+const mmss=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+async function data(s){return DATA[s]||(DATA[s]=await (await fetch('data/'+s+'.json')).json())}
+async function results(s){let r=[];try{const x=await fetch('/api/results/'+s,{cache:'no-store'});if(!x.ok)throw 0;r=await x.json()}catch(e){}
+  try{r=r.concat(JSON.parse(localStorage.getItem('local_'+s)||'[]'))}catch(e){}return RES[s]=r}
+async function save(rec){try{const x=await fetch('/api/result',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)});if(!x.ok)throw 0;return'server'}
+  catch(e){const k='local_'+rec.subject,a=JSON.parse(localStorage.getItem(k)||'[]');a.push({...rec,date:new Date().toISOString().slice(0,19).replace('T',' ')});localStorage.setItem(k,JSON.stringify(a));return'local'}}
+function board(rs,variant){const m={};for(const r of rs){if(variant&&r.variant!==variant)continue;const k=r.name.toLowerCase();if(!m[k]||r.score>m[k].score||(r.score===m[k].score&&r.time<m[k].time))m[k]=r}
+  return Object.values(m).sort((a,b)=>b.score-a.score||a.time-b.time)}
+function userUI(){$('#user').innerHTML=user?`👤 ${esc(user.name)} <button class="btn g" onclick="askName(true)">O'zgartirish</button>`:''}
+function askName(force){return new Promise(res=>{if(user&&!force)return res();const m=document.createElement('div');m.className='modal';
+ const[a,b]=(user?user.name:'').split(' ');m.innerHTML=`<div class="card"><h2 style="margin-top:0">Xush kelibsiz!</h2><p class="mu">Natijangiz reytingda ko'rinishi uchun ism va familiyangizni kiriting.</p>
+ <label>Ism</label><input id="fn" value="${esc(a||'')}" maxlength="25"><label>Familya</label><input id="ln" value="${esc(b||'')}" maxlength="25"><button class="btn" style="width:100%" id="ok">Davom etish</button></div>`;
+ document.body.appendChild(m);const go=()=>{const f=$('#fn').value.trim(),l=$('#ln').value.trim();if(!f||!l){(f?$('#ln'):$('#fn')).focus();return}
+  user={name:f+' '+l};localStorage.setItem('chsb_user',JSON.stringify(user));m.remove();userUI();res()};$('#ok').onclick=go;m.onkeydown=e=>e.key==='Enter'&&go();$('#fn').focus()})}
+function go(h){location.hash='#/'+h}
+addEventListener('hashchange',route);
+async function route(){clearInterval(tick);scrollTo(0,0);const p=location.hash.replace(/^#\/?/,'').split('/');
+ if(!p[0])return home();if(p[0]==='s')return subject(p[1]);if(p[0]==='t')return startTest(p[1],p[2]);if(p[0]==='r')return rating(p[1]);home()}
+async function home(){app.innerHTML=`<h1>Tayyorgarlik testlari</h1><p class="sub">Fanni tanlang, variantni yeching va reytingda o'z o'rningizni ko'ring.</p><div class="grid" id="g"></div>`;
+ for(const[id,s]of Object.entries(SUB)){const d=await data(id),rs=await results(id),top=board(rs).slice(0,3),nq=d[0].questions.length,tot=d[0].questions.reduce((a,q)=>a+q.pts,0);
+  const el=document.createElement('div');el.className='card subj';el.style.setProperty('--c',s.c);
+  el.innerHTML=`<div class="ic">${s.ic}</div><h3>${s.n}</h3><div class="meta">${d.length} ta variant · ${nq} ta savol · ${fmt(tot)} ball · ${s.min} daqiqa</div>
+  <div style="display:flex;gap:8px"><button class="btn" style="background:${s.c}" onclick="go('s/${id}')">Testlarni ochish</button><button class="btn g" onclick="go('r/${id}')">🏆 Reyting</button></div>
+  <div class="top"><b>Top 3</b>${top.length?top.map((r,i)=>`<div class="row"><span>${['🥇','🥈','🥉'][i]} ${esc(r.name)}</span><span>${fmt(r.score)}/${fmt(r.total)}</span></div>`).join(''):'<div class="mu">Hali natija yo\'q — birinchi bo\'ling!</div>'}</div>`;$('#g').appendChild(el)}}
+async function subject(id){const s=SUB[id];if(!s)return home();const d=await data(id),rs=await results(id);
+ app.innerHTML=`<div class="crumb" onclick="go('')">← Bosh sahifa</div><h1>${s.ic} ${s.n}</h1><p class="sub">Variantni tanlang. Eng yaxshi natijangiz variant ostida ko'rinadi.</p>
+ <div class="vgrid" style="--c:${s.c}">${d.map(t=>{const tot=t.questions.reduce((a,q)=>a+q.pts,0),mine=user?rs.filter(r=>r.variant===t.id&&r.name===user.name).sort((a,b)=>b.score-a.score)[0]:0;
+ return`<button class="v" onclick="go('t/${id}/${t.id}')"><b>${vname(t.id)}</b><small>${t.questions.length} savol · ${fmt(tot)} ball</small>${mine?`<div class="best">✓ ${fmt(mine.score)}/${fmt(mine.total)}</div>`:''}</button>`}).join('')}</div>
+ <p><button class="btn g" onclick="go('r/${id}')">🏆 ${s.n} reytingi</button></p>`}
+async function rating(id){const s=SUB[id];if(!s)return home();const d=await data(id),rs=await results(id);
+ const draw=v=>{const b=board(rs,v).slice(0,50);$('#tb').innerHTML=b.length?b.map((r,i)=>`<tr${user&&r.name===user.name?' style="background:var(--card2)"':''}><td>${['🥇','🥈','🥉'][i]||i+1}</td><td>${esc(r.name)}</td><td>${fmt(r.score)}/${fmt(r.total)}</td><td>${Math.round(r.score/r.total*100)}%</td><td>${vname(r.variant)}</td><td>${mmss(r.time)}</td></tr>`).join(''):'<tr><td colspan="6" class="mu">Hozircha natijalar yo\'q.</td></tr>'};
+ app.innerHTML=`<div class="crumb" onclick="go('')">← Bosh sahifa</div><h1>🏆 ${s.n} — Top reyting</h1><p class="sub">Har bir o'quvchining eng yaxshi natijasi (ball teng bo'lsa — tezroq yechgan yuqorida).</p>
+ <div class="card"><select id="vf"><option value="">Barcha variantlar</option>${d.map(t=>`<option value="${t.id}">${vname(t.id)}</option>`).join('')}</select>
+ <table style="margin-top:10px"><thead><tr><th>#</th><th>Ism familya</th><th>Ball</th><th>Foiz</th><th>Variant</th><th>Vaqt</th></tr></thead><tbody id="tb"></tbody></table></div>`;
+ $('#vf').onchange=e=>draw(e.target.value);draw('')}
+async function startTest(id,vid){await askName();const s=SUB[id],t=(await data(id)).find(x=>x.id===vid);if(!t)return home();
+ T={id,vid,t,ans:{},i:0,left:s.min*60,start:Date.now(),done:false};drawQ();
+ tick=setInterval(()=>{T.left=s.min*60-Math.floor((Date.now()-T.start)/1000);const e=$('#tm');if(e){e.textContent=mmss(Math.max(T.left,0));e.classList.toggle('low',T.left<300)}if(T.left<=0)finish()},500)}
+function drawQ(){const{t,ans,i,id,vid}=T,q=t.questions[i],s=SUB[id],done=Object.keys(ans).length;
+ app.innerHTML=`<div class="crumb" onclick="if(confirm('Testdan chiqasizmi? Natija saqlanmaydi.'))go('s/${id}')">← ${s.n}</div>
+ <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">${s.ic} ${vname(vid)}</h2><div class="timer" id="tm">${mmss(Math.max(T.left,0))}</div></div>
+ <div class="bar"><i style="width:${done/t.questions.length*100}%"></i></div>
+ <div class="qwrap"><div><div class="mu" style="margin-bottom:6px">${q.n}-savol · ${fmt(q.pts)} ball</div><div class="qimg">${q.img.map(f=>`<img src="data/img/${id}/${f}" alt="${q.n}-savol">`).join('')}</div>
+ <div class="opts">${'ABCD'.split('').map(l=>`<button class="o ${ans[q.n]===l?'sel':''}" onclick="pick('${l}')">${l}</button>`).join('')}</div>
+ <div style="display:flex;justify-content:space-between"><button class="btn g" onclick="mv(-1)" ${i?'':'disabled'}>← Oldingi</button>${i<t.questions.length-1?`<button class="btn" onclick="mv(1)">Keyingi →</button>`:`<button class="btn" style="background:var(--ok)" onclick="finish(true)">Yakunlash ✓</button>`}</div></div>
+ <div class="card" style="align-self:start"><b>Savollar</b> <span class="mu">${done}/${t.questions.length}</span><div class="nav" style="margin:10px 0">${t.questions.map((x,k)=>`<button class="${ans[x.n]?'ans':''} ${k===i?'cur':''}" onclick="T.i=${k};drawQ()">${x.n}</button>`).join('')}</div>
+ <button class="btn" style="width:100%;background:var(--ok)" onclick="finish(true)">Testni yakunlash</button></div></div>`}
+function pick(l){const n=T.t.questions[T.i].n;if(T.ans[n]===l)delete T.ans[n];else T.ans[n]=l;drawQ()}
+function mv(d){T.i=Math.max(0,Math.min(T.t.questions.length-1,T.i+d));drawQ()}
+addEventListener('keydown',e=>{if(!T||T.done||!$('.opts')||e.target.tagName==='INPUT')return;const k=e.key.toUpperCase();if('ABCD'.includes(k)&&k.length===1)pick(k);else if(e.key==='ArrowRight')mv(1);else if(e.key==='ArrowLeft')mv(-1)});
+async function finish(ask){if(!T||T.done)return;const un=T.t.questions.length-Object.keys(T.ans).length;if(ask&&!confirm(un?`${un} ta savolga javob berilmagan. Yakunlaysizmi?`:'Testni yakunlaysizmi?'))return;
+ T.done=true;clearInterval(tick);const{t,ans,id,vid}=T,time=Math.min(Math.floor((Date.now()-T.start)/1000),SUB[id].min*60);let sc=0,c=0,w=0,sk=0;
+ for(const q of t.questions){if(!ans[q.n])sk++;else if(ans[q.n]===q.ans){c++;sc+=q.pts}else w++}
+ const tot=t.questions.reduce((a,q)=>a+q.pts,0),unv=(UNVER[id]||[]).includes(vid);let where='';
+ if(!unv)where=await save({subject:id,variant:vid,name:user.name,score:sc,total:tot,correct:c,wrong:w,skipped:sk,time});
+ const p=Math.round(sc/tot*100),s=SUB[id];
+ app.innerHTML=`<div class="crumb" onclick="go('s/${id}')">← ${s.n}</div><h1>Natija — ${vname(vid)}</h1>
+ ${unv?`<div class="warn">⚠️ PDFdagi bu variantning javoblar kaliti to'liq emas (barcha javob "A" deb yozilgan), shuning uchun ball ishonchsiz va reytingga <b>saqlanmadi</b>.</div>`:''}
+ ${where==='local'?`<div class="warn">Server ishlamayapti — natija faqat shu brauzerda saqlandi. JSON faylga yozish uchun <code>python server.py</code> orqali oching.</div>`:''}
+ <div class="card score"><div class="ring" style="--p:${p};--ac:${p>=70?'var(--ok)':p>=50?'#f59e0b':'var(--no)'}"><div><span>${p}%<small>${fmt(sc)}/${fmt(tot)}</small></span></div></div>
+ <div><div class="stats"><div class="st"><b style="color:var(--ok)">${c}</b>to'g'ri</div><div class="st"><b style="color:var(--no)">${w}</b>xato</div><div class="st"><b>${sk}</b>belgilanmagan</div><div class="st"><b>${mmss(time)}</b>vaqt</div></div>
+ <p style="margin:14px 0 0"><button class="btn" onclick="go('t/${id}/${vid}');route()">Qayta yechish</button> <button class="btn g" onclick="go('r/${id}')">🏆 Reyting</button> <button class="btn g" onclick="go('s/${id}')">Boshqa variant</button></p></div></div>
+ <h2>Savollar tahlili</h2>${t.questions.map(q=>{const a=ans[q.n],st=!a?'skip':a===q.ans?'ok':'bad';
+  return`<div class="ri ${st}" id="ri${q.n}"><button onclick="this.parentNode.classList.toggle('open')"><b>${q.n}.</b><span class="pill ${st}" ${st==='skip'?'style="background:var(--card2);color:var(--mu)"':''}>${st==='ok'?'To\'g\'ri':st==='bad'?'Xato':'Belgilanmagan'}</span>
+  <span>Sizning javob: <b>${a||'—'}</b> · To'g'ri javob: <b style="color:var(--ok)">${q.ans}</b></span><span style="margin-left:auto" class="mu">${st==='ok'?'+'+fmt(q.pts):'0'}/${fmt(q.pts)} ▾</span></button>
+  <div class="body"><div class="qimg">${q.img.map(f=>`<img src="data/img/${id}/${f}" loading="lazy">`).join('')}</div><p class="mu" style="margin:10px 0 4px"><b>Yechim / izoh:</b></p><div class="qimg">${q.exp.map(f=>`<img src="data/img/${id}/${f}" loading="lazy" style="min-width:600px">`).join('')}</div></div></div>`}).join('')}`;
+ scrollTo(0,0)}
+userUI();askName().then(route);
+</script></body></html>

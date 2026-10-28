@@ -1,122 +1,1894 @@
 <!DOCTYPE html>
-<html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CHSB_PRO — 9-sinf test platformasi</title>
-<style>
-:root{--bg:#0f1220;--card:#181c30;--card2:#20253d;--tx:#eef0fa;--mu:#9aa1c2;--bd:#2c3253;--ok:#22c55e;--no:#ef4444;--ac:#6c8cff}
-@media(prefers-color-scheme:light){:root{--bg:#f3f5fb;--card:#fff;--card2:#eef1fa;--tx:#151a33;--mu:#5d6585;--bd:#dde2f0}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-button{font:inherit;cursor:pointer;color:inherit}a{color:var(--ac)}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--bg);z-index:5}
-.logo{font-weight:800;font-size:20px;letter-spacing:.5px;cursor:pointer}.logo b{color:var(--ac)}
-.user{display:flex;gap:10px;align-items:center;color:var(--mu);font-size:14px}
-.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 18px;font-weight:600}.btn.g{background:var(--card2);color:var(--tx);border:1px solid var(--bd)}.btn:disabled{opacity:.4;cursor:default}
-main{max-width:1050px;margin:0 auto;padding:24px 16px 60px}
-h1{font-size:30px;margin:6px 0 4px}h2{font-size:20px;margin:28px 0 12px}.sub{color:var(--mu);margin:0 0 20px}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:20px}
-.subj{position:relative;overflow:hidden}.subj:before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--c)}
-.subj .ic{font-size:34px}.subj h3{margin:6px 0 2px;font-size:22px}.subj .meta{color:var(--mu);font-size:14px;margin-bottom:14px}
-.subj .top{border-top:1px solid var(--bd);margin-top:14px;padding-top:10px;font-size:14px}
-.row{display:flex;justify-content:space-between;gap:8px;padding:4px 0}.row span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mu{color:var(--mu)}
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.v{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;text-align:left;transition:.15s}.v:hover{transform:translateY(-2px);border-color:var(--c)}
-.v b{font-size:18px}.v small{display:block;color:var(--mu)}.v .best{margin-top:6px;font-weight:600;color:var(--c)}
-table{width:100%;border-collapse:collapse}th,td{padding:9px 8px;text-align:left;border-bottom:1px solid var(--bd);font-size:15px}th{color:var(--mu);font-weight:600;font-size:13px}
-select{background:var(--card2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:7px 10px;font:inherit}
-.qwrap{display:grid;grid-template-columns:1fr 250px;gap:16px}@media(max-width:800px){.qwrap{grid-template-columns:1fr}}
-.qimg{background:#fff;border-radius:12px;padding:6px;overflow-x:auto}.qimg img{display:block;width:100%;min-width:520px;height:auto}
-.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}@media(max-width:520px){.opts{grid-template-columns:repeat(2,1fr)}}
-.o{padding:14px;border-radius:12px;background:var(--card2);border:2px solid var(--bd);font-weight:700;font-size:18px}.o.sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card2))}
-.nav{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.nav button{aspect-ratio:1;border-radius:9px;border:1px solid var(--bd);background:var(--card2);font-weight:600}.nav .ans{background:var(--ac);color:#fff;border-color:var(--ac)}.nav .cur{outline:2px solid var(--tx)}
-.bar{height:6px;background:var(--card2);border-radius:9px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;background:var(--ac)}
-.timer{font-variant-numeric:tabular-nums;font-weight:700;font-size:20px}.timer.low{color:var(--no)}
-.score{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--ac) calc(var(--p)*1%),var(--card2) 0)}.ring div{width:118px;height:118px;border-radius:50%;background:var(--card);display:grid;place-items:center;text-align:center;font-size:28px;font-weight:800;line-height:1.1}.ring small{display:block;font-size:13px;color:var(--mu);font-weight:500}
-.stats{display:flex;gap:12px;flex-wrap:wrap}.st{background:var(--card2);border-radius:12px;padding:10px 16px}.st b{display:block;font-size:22px}
-.ri{border:1px solid var(--bd);border-radius:12px;margin:8px 0;overflow:hidden;background:var(--card)}.ri>button{width:100%;display:flex;gap:12px;align-items:center;background:none;border:0;padding:12px 14px;text-align:left}
-.ri.ok{border-left:5px solid var(--ok)}.ri.bad{border-left:5px solid var(--no)}.ri.skip{border-left:5px solid var(--mu)}.ri .body{padding:0 14px 14px;display:none}.ri.open .body{display:block}
-.pill{padding:2px 10px;border-radius:99px;font-size:13px;font-weight:700}.pill.ok{background:#22c55e33;color:var(--ok)}.pill.bad{background:#ef444433;color:var(--no)}
-.warn{background:#f59e0b22;border:1px solid #f59e0b;border-radius:12px;padding:10px 14px;margin:12px 0}
-.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:20;padding:16px}.modal .card{max-width:400px;width:100%}
-input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--bd);background:var(--card2);color:var(--tx);font:inherit;margin:6px 0 12px}
-.medal{display:inline-block;width:26px}
-.crumb{color:var(--mu);font-size:14px;margin-bottom:6px;cursor:pointer}
-</style></head><body>
-<header><div class="logo" onclick="go('')">CHSB<b>_PRO</b> <span class="mu" style="font-weight:500;font-size:14px">9-sinf</span></div><div class="user" id="user"></div></header>
-<main id="app"></main>
+<html lang="uz" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHSB_PRO — 9-sinf fanlaridan interaktiv test va reyting platformasi</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
-const SUB={fizika:{n:'Fizika',ic:'⚛️',c:'#4f8cff',min:40},matematika:{n:'Matematika',ic:'📐',c:'#a855f7',min:45},ingliz:{n:'Ingliz tili',ic:'🇬🇧',c:'#f59e0b',min:45}};
-const UNVER={matematika:['demo']};            // javob kaliti PDFda to'liq emas
-const $=s=>document.querySelector(s),app=$('#app');
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const vname=v=>v==='demo'?'Demo variant':v+'-variant';
-let user=JSON.parse(localStorage.getItem('chsb_user')||'null'),DATA={},RES={},T=null,tick=null;
-const fmt=x=>(Math.round(x*10)/10).toString().replace('.',',');
-const mmss=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
-async function data(s){return DATA[s]||(DATA[s]=await (await fetch('data/'+s+'.json')).json())}
-async function results(s){let r=[];try{const x=await fetch('/api/results/'+s,{cache:'no-store'});if(!x.ok)throw 0;r=await x.json()}catch(e){}
-  try{r=r.concat(JSON.parse(localStorage.getItem('local_'+s)||'[]'))}catch(e){}return RES[s]=r}
-async function save(rec){try{const x=await fetch('/api/result',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)});if(!x.ok)throw 0;return'server'}
-  catch(e){const k='local_'+rec.subject,a=JSON.parse(localStorage.getItem(k)||'[]');a.push({...rec,date:new Date().toISOString().slice(0,19).replace('T',' ')});localStorage.setItem(k,JSON.stringify(a));return'local'}}
-function board(rs,variant){const m={};for(const r of rs){if(variant&&r.variant!==variant)continue;const k=r.name.toLowerCase();if(!m[k]||r.score>m[k].score||(r.score===m[k].score&&r.time<m[k].time))m[k]=r}
-  return Object.values(m).sort((a,b)=>b.score-a.score||a.time-b.time)}
-function userUI(){$('#user').innerHTML=user?`👤 ${esc(user.name)} <button class="btn g" onclick="askName(true)">O'zgartirish</button>`:''}
-function askName(force){return new Promise(res=>{if(user&&!force)return res();const m=document.createElement('div');m.className='modal';
- const[a,b]=(user?user.name:'').split(' ');m.innerHTML=`<div class="card"><h2 style="margin-top:0">Xush kelibsiz!</h2><p class="mu">Natijangiz reytingda ko'rinishi uchun ism va familiyangizni kiriting.</p>
- <label>Ism</label><input id="fn" value="${esc(a||'')}" maxlength="25"><label>Familya</label><input id="ln" value="${esc(b||'')}" maxlength="25"><button class="btn" style="width:100%" id="ok">Davom etish</button></div>`;
- document.body.appendChild(m);const go=()=>{const f=$('#fn').value.trim(),l=$('#ln').value.trim();if(!f||!l){(f?$('#ln'):$('#fn')).focus();return}
-  user={name:f+' '+l};localStorage.setItem('chsb_user',JSON.stringify(user));m.remove();userUI();res()};$('#ok').onclick=go;m.onkeydown=e=>e.key==='Enter'&&go();$('#fn').focus()})}
-function go(h){location.hash='#/'+h}
-addEventListener('hashchange',route);
-async function route(){clearInterval(tick);scrollTo(0,0);const p=location.hash.replace(/^#\/?/,'').split('/');
- if(!p[0])return home();if(p[0]==='s')return subject(p[1]);if(p[0]==='t')return startTest(p[1],p[2]);if(p[0]==='r')return rating(p[1]);home()}
-async function home(){app.innerHTML=`<h1>Tayyorgarlik testlari</h1><p class="sub">Fanni tanlang, variantni yeching va reytingda o'z o'rningizni ko'ring.</p><div class="grid" id="g"></div>`;
- for(const[id,s]of Object.entries(SUB)){const d=await data(id),rs=await results(id),top=board(rs).slice(0,3),nq=d[0].questions.length,tot=d[0].questions.reduce((a,q)=>a+q.pts,0);
-  const el=document.createElement('div');el.className='card subj';el.style.setProperty('--c',s.c);
-  el.innerHTML=`<div class="ic">${s.ic}</div><h3>${s.n}</h3><div class="meta">${d.length} ta variant · ${nq} ta savol · ${fmt(tot)} ball · ${s.min} daqiqa</div>
-  <div style="display:flex;gap:8px"><button class="btn" style="background:${s.c}" onclick="go('s/${id}')">Testlarni ochish</button><button class="btn g" onclick="go('r/${id}')">🏆 Reyting</button></div>
-  <div class="top"><b>Top 3</b>${top.length?top.map((r,i)=>`<div class="row"><span>${['🥇','🥈','🥉'][i]} ${esc(r.name)}</span><span>${fmt(r.score)}/${fmt(r.total)}</span></div>`).join(''):'<div class="mu">Hali natija yo\'q — birinchi bo\'ling!</div>'}</div>`;$('#g').appendChild(el)}}
-async function subject(id){const s=SUB[id];if(!s)return home();const d=await data(id),rs=await results(id);
- app.innerHTML=`<div class="crumb" onclick="go('')">← Bosh sahifa</div><h1>${s.ic} ${s.n}</h1><p class="sub">Variantni tanlang. Eng yaxshi natijangiz variant ostida ko'rinadi.</p>
- <div class="vgrid" style="--c:${s.c}">${d.map(t=>{const tot=t.questions.reduce((a,q)=>a+q.pts,0),mine=user?rs.filter(r=>r.variant===t.id&&r.name===user.name).sort((a,b)=>b.score-a.score)[0]:0;
- return`<button class="v" onclick="go('t/${id}/${t.id}')"><b>${vname(t.id)}</b><small>${t.questions.length} savol · ${fmt(tot)} ball</small>${mine?`<div class="best">✓ ${fmt(mine.score)}/${fmt(mine.total)}</div>`:''}</button>`}).join('')}</div>
- <p><button class="btn g" onclick="go('r/${id}')">🏆 ${s.n} reytingi</button></p>`}
-async function rating(id){const s=SUB[id];if(!s)return home();const d=await data(id),rs=await results(id);
- const draw=v=>{const b=board(rs,v).slice(0,50);$('#tb').innerHTML=b.length?b.map((r,i)=>`<tr${user&&r.name===user.name?' style="background:var(--card2)"':''}><td>${['🥇','🥈','🥉'][i]||i+1}</td><td>${esc(r.name)}</td><td>${fmt(r.score)}/${fmt(r.total)}</td><td>${Math.round(r.score/r.total*100)}%</td><td>${vname(r.variant)}</td><td>${mmss(r.time)}</td></tr>`).join(''):'<tr><td colspan="6" class="mu">Hozircha natijalar yo\'q.</td></tr>'};
- app.innerHTML=`<div class="crumb" onclick="go('')">← Bosh sahifa</div><h1>🏆 ${s.n} — Top reyting</h1><p class="sub">Har bir o'quvchining eng yaxshi natijasi (ball teng bo'lsa — tezroq yechgan yuqorida).</p>
- <div class="card"><select id="vf"><option value="">Barcha variantlar</option>${d.map(t=>`<option value="${t.id}">${vname(t.id)}</option>`).join('')}</select>
- <table style="margin-top:10px"><thead><tr><th>#</th><th>Ism familya</th><th>Ball</th><th>Foiz</th><th>Variant</th><th>Vaqt</th></tr></thead><tbody id="tb"></tbody></table></div>`;
- $('#vf').onchange=e=>draw(e.target.value);draw('')}
-async function startTest(id,vid){await askName();const s=SUB[id],t=(await data(id)).find(x=>x.id===vid);if(!t)return home();
- T={id,vid,t,ans:{},i:0,left:s.min*60,start:Date.now(),done:false};drawQ();
- tick=setInterval(()=>{T.left=s.min*60-Math.floor((Date.now()-T.start)/1000);const e=$('#tm');if(e){e.textContent=mmss(Math.max(T.left,0));e.classList.toggle('low',T.left<300)}if(T.left<=0)finish()},500)}
-function drawQ(){const{t,ans,i,id,vid}=T,q=t.questions[i],s=SUB[id],done=Object.keys(ans).length;
- app.innerHTML=`<div class="crumb" onclick="if(confirm('Testdan chiqasizmi? Natija saqlanmaydi.'))go('s/${id}')">← ${s.n}</div>
- <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">${s.ic} ${vname(vid)}</h2><div class="timer" id="tm">${mmss(Math.max(T.left,0))}</div></div>
- <div class="bar"><i style="width:${done/t.questions.length*100}%"></i></div>
- <div class="qwrap"><div><div class="mu" style="margin-bottom:6px">${q.n}-savol · ${fmt(q.pts)} ball</div><div class="qimg">${q.img.map(f=>`<img src="data/img/${id}/${f}" alt="${q.n}-savol">`).join('')}</div>
- <div class="opts">${'ABCD'.split('').map(l=>`<button class="o ${ans[q.n]===l?'sel':''}" onclick="pick('${l}')">${l}</button>`).join('')}</div>
- <div style="display:flex;justify-content:space-between"><button class="btn g" onclick="mv(-1)" ${i?'':'disabled'}>← Oldingi</button>${i<t.questions.length-1?`<button class="btn" onclick="mv(1)">Keyingi →</button>`:`<button class="btn" style="background:var(--ok)" onclick="finish(true)">Yakunlash ✓</button>`}</div></div>
- <div class="card" style="align-self:start"><b>Savollar</b> <span class="mu">${done}/${t.questions.length}</span><div class="nav" style="margin:10px 0">${t.questions.map((x,k)=>`<button class="${ans[x.n]?'ans':''} ${k===i?'cur':''}" onclick="T.i=${k};drawQ()">${x.n}</button>`).join('')}</div>
- <button class="btn" style="width:100%;background:var(--ok)" onclick="finish(true)">Testni yakunlash</button></div></div>`}
-function pick(l){const n=T.t.questions[T.i].n;if(T.ans[n]===l)delete T.ans[n];else T.ans[n]=l;drawQ()}
-function mv(d){T.i=Math.max(0,Math.min(T.t.questions.length-1,T.i+d));drawQ()}
-addEventListener('keydown',e=>{if(!T||T.done||!$('.opts')||e.target.tagName==='INPUT')return;const k=e.key.toUpperCase();if('ABCD'.includes(k)&&k.length===1)pick(k);else if(e.key==='ArrowRight')mv(1);else if(e.key==='ArrowLeft')mv(-1)});
-async function finish(ask){if(!T||T.done)return;const un=T.t.questions.length-Object.keys(T.ans).length;if(ask&&!confirm(un?`${un} ta savolga javob berilmagan. Yakunlaysizmi?`:'Testni yakunlaysizmi?'))return;
- T.done=true;clearInterval(tick);const{t,ans,id,vid}=T,time=Math.min(Math.floor((Date.now()-T.start)/1000),SUB[id].min*60);let sc=0,c=0,w=0,sk=0;
- for(const q of t.questions){if(!ans[q.n])sk++;else if(ans[q.n]===q.ans){c++;sc+=q.pts}else w++}
- const tot=t.questions.reduce((a,q)=>a+q.pts,0),unv=(UNVER[id]||[]).includes(vid);let where='';
- if(!unv)where=await save({subject:id,variant:vid,name:user.name,score:sc,total:tot,correct:c,wrong:w,skipped:sk,time});
- const p=Math.round(sc/tot*100),s=SUB[id];
- app.innerHTML=`<div class="crumb" onclick="go('s/${id}')">← ${s.n}</div><h1>Natija — ${vname(vid)}</h1>
- ${unv?`<div class="warn">⚠️ PDFdagi bu variantning javoblar kaliti to'liq emas (barcha javob "A" deb yozilgan), shuning uchun ball ishonchsiz va reytingga <b>saqlanmadi</b>.</div>`:''}
- ${where==='local'?`<div class="warn">Server ishlamayapti — natija faqat shu brauzerda saqlandi. JSON faylga yozish uchun <code>python server.py</code> orqali oching.</div>`:''}
- <div class="card score"><div class="ring" style="--p:${p};--ac:${p>=70?'var(--ok)':p>=50?'#f59e0b':'var(--no)'}"><div><span>${p}%<small>${fmt(sc)}/${fmt(tot)}</small></span></div></div>
- <div><div class="stats"><div class="st"><b style="color:var(--ok)">${c}</b>to'g'ri</div><div class="st"><b style="color:var(--no)">${w}</b>xato</div><div class="st"><b>${sk}</b>belgilanmagan</div><div class="st"><b>${mmss(time)}</b>vaqt</div></div>
- <p style="margin:14px 0 0"><button class="btn" onclick="go('t/${id}/${vid}');route()">Qayta yechish</button> <button class="btn g" onclick="go('r/${id}')">🏆 Reyting</button> <button class="btn g" onclick="go('s/${id}')">Boshqa variant</button></p></div></div>
- <h2>Savollar tahlili</h2>${t.questions.map(q=>{const a=ans[q.n],st=!a?'skip':a===q.ans?'ok':'bad';
-  return`<div class="ri ${st}" id="ri${q.n}"><button onclick="this.parentNode.classList.toggle('open')"><b>${q.n}.</b><span class="pill ${st}" ${st==='skip'?'style="background:var(--card2);color:var(--mu)"':''}>${st==='ok'?'To\'g\'ri':st==='bad'?'Xato':'Belgilanmagan'}</span>
-  <span>Sizning javob: <b>${a||'—'}</b> · To'g'ri javob: <b style="color:var(--ok)">${q.ans}</b></span><span style="margin-left:auto" class="mu">${st==='ok'?'+'+fmt(q.pts):'0'}/${fmt(q.pts)} ▾</span></button>
-  <div class="body"><div class="qimg">${q.img.map(f=>`<img src="data/img/${id}/${f}" loading="lazy">`).join('')}</div><p class="mu" style="margin:10px 0 4px"><b>Yechim / izoh:</b></p><div class="qimg">${q.exp.map(f=>`<img src="data/img/${id}/${f}" loading="lazy" style="min-width:600px">`).join('')}</div></div></div>`}).join('')}`;
- scrollTo(0,0)}
-userUI();askName().then(route);
-</script></body></html>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] }
+    }
+  }
+};
+</script>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --card: #13192b;
+    --card2: #1c243d;
+    --tx: #f1f5f9;
+    --mu: #94a3b8;
+    --bd: #26314f;
+  }
+  html.light {
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --card2: #f8fafc;
+    --tx: #0f172a;
+    --mu: #64748b;
+    --bd: #e2e8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--tx);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .surface-card {
+    background-color: var(--card);
+    border: 1px solid var(--bd);
+  }
+  .surface-card2 {
+    background-color: var(--card2);
+    border: 1px solid var(--bd);
+  }
+  .text-muted { color: var(--mu); }
+  .border-subtle { border-color: var(--bd); }
+  .q-image-box {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    overflow-x: auto;
+  }
+  .q-image-box img {
+    display: block;
+    width: 100%;
+    max-width: 860px;
+    height: auto;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+  .score-ring {
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(var(--ring-color, #3b82f6) calc(var(--pct, 0) * 1%), var(--card2) 0);
+    flex-shrink: 0;
+  }
+  .score-ring-inner {
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+    background: var(--card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade { animation: fadeIn 0.2s ease-out; }
+</style>
+</head>
+<body class="antialiased selection:bg-indigo-500 selection:text-white">
+
+<!-- Sticky Header -->
+<header class="sticky top-0 z-30 backdrop-blur-md bg-opacity-90 surface-card border-t-0 border-x-0 px-4 sm:px-6 py-3">
+  <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <button type="button" id="brandHomeBtn" class="flex items-center gap-2 text-left group focus:outline-none">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white font-extrabold text-lg shadow-md shadow-indigo-500/20 group-hover:scale-105 transition">
+          9
+        </div>
+        <div>
+          <div class="font-extrabold text-lg tracking-tight leading-none">
+            CHSB<span class="text-indigo-500">_PRO</span>
+          </div>
+          <div class="text-xs text-muted font-medium mt-0.5">9-sinf test va reyting tizimi</div>
+        </div>
+      </button>
+    </div>
+
+    <nav class="flex items-center gap-2 sm:gap-3 flex-wrap">
+      <button type="button" id="navHomeBtn" class="px-3 py-1.5 rounded-lg text-sm font-semibold surface-card2 hover:border-indigo-500 transition">
+        🏠 Bosh sahifa
+      </button>
+      <button type="button" id="navJsonBtn" class="px-3 py-1.5 rounded-lg text-sm font-semibold surface-card2 hover:border-indigo-500 transition">
+        💾 JSON Baza
+      </button>
+      <button type="button" id="themeToggleBtn" class="p-2 rounded-lg surface-card2 hover:border-indigo-500 transition text-sm" title="Mavzuni o'zgartirish">
+        🌓
+      </button>
+      <div id="userHeaderBox" class="flex items-center gap-2"></div>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Content Container -->
+<main id="app" class="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-20"></main>
+
+<!-- Hidden File Input for JSON Import -->
+<input type="file" id="jsonFileInput" accept=".json,application/json" class="hidden">
+
+<!-- Toast Notification Container -->
+<div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+<!-- Universal Modal Container -->
+<div id="modalRoot" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4"></div>
+
+<script id="embeddedImagesJson" type="application/json">null</script>
+<!-- Image Zoom Modal -->
+<div id="zoomModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 cursor-zoom-out">
+  <div class="relative max-w-5xl w-full bg-white rounded-2xl p-4 shadow-2xl overflow-auto max-h-[92vh]">
+    <button type="button" id="closeZoomBtn" class=" sticky top-2 float-right bg-slate-900 text-white rounded-full w-9 h-9 font-bold text-lg flex items-center justify-center shadow-lg">✕</button>
+    <img id="zoomImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Kattalashtirilgan savol rasmi" class="w-full h-auto block mx-auto">
+  </div>
+</div>
+
+<script>
+// ============================================================================
+// 1. EMBEDDED QUESTION & IMAGE DATA (Works 100% offline on file:// & Canvas)
+// ============================================================================
+const EMBEDDED_DATA = {"fizika": [{"id": "demo", "questions": [{"n": 1, "img": ["demo_q1_0.webp"], "exp": ["demo_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 2, "img": ["demo_q2_0.webp"], "exp": ["demo_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 3, "img": ["demo_q3_0.webp"], "exp": ["demo_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 4, "img": ["demo_q4_0.webp"], "exp": ["demo_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 5, "img": ["demo_q5_0.webp"], "exp": ["demo_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 6, "img": ["demo_q6_0.webp"], "exp": ["demo_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 7, "img": ["demo_q7_0.webp"], "exp": ["demo_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 8, "img": ["demo_q8_0.webp"], "exp": ["demo_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 9, "img": ["demo_q9_0.webp"], "exp": ["demo_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 10, "img": ["demo_q10_0.webp"], "exp": ["demo_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 11, "img": ["demo_q11_0.webp"], "exp": ["demo_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 12, "img": ["demo_q12_0.webp"], "exp": ["demo_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 13, "img": ["demo_q13_0.webp"], "exp": ["demo_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 14, "img": ["demo_q14_0.webp"], "exp": ["demo_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}, {"n": 15, "img": ["demo_q15_0.webp"], "exp": ["demo_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "1", "questions": [{"n": 1, "img": ["1_q1_0.webp"], "exp": ["1_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["1_q2_0.webp"], "exp": ["1_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["1_q3_0.webp"], "exp": ["1_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 4, "img": ["1_q4_0.webp"], "exp": ["1_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 5, "img": ["1_q5_0.webp"], "exp": ["1_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 6, "img": ["1_q6_0.webp"], "exp": ["1_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 7, "img": ["1_q7_0.webp"], "exp": ["1_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 8, "img": ["1_q8_0.webp"], "exp": ["1_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 9, "img": ["1_q9_0.webp"], "exp": ["1_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 10, "img": ["1_q10_0.webp"], "exp": ["1_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 11, "img": ["1_q11_0.webp"], "exp": ["1_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 12, "img": ["1_q12_0.webp"], "exp": ["1_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 13, "img": ["1_q13_0.webp"], "exp": ["1_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 14, "img": ["1_q14_0.webp"], "exp": ["1_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}, {"n": 15, "img": ["1_q15_0.webp"], "exp": ["1_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}]}, {"id": "2", "questions": [{"n": 1, "img": ["2_q1_0.webp"], "exp": ["2_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["2_q2_0.webp"], "exp": ["2_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["2_q3_0.webp"], "exp": ["2_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 4, "img": ["2_q4_0.webp"], "exp": ["2_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 5, "img": ["2_q5_0.webp"], "exp": ["2_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 6, "img": ["2_q6_0.webp"], "exp": ["2_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 7, "img": ["2_q7_0.webp"], "exp": ["2_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 8, "img": ["2_q8_0.webp"], "exp": ["2_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 9, "img": ["2_q9_0.webp"], "exp": ["2_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 10, "img": ["2_q10_0.webp"], "exp": ["2_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 11, "img": ["2_q11_0.webp"], "exp": ["2_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 12, "img": ["2_q12_0.webp"], "exp": ["2_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 13, "img": ["2_q13_0.webp"], "exp": ["2_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 14, "img": ["2_q14_0.webp"], "exp": ["2_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}, {"n": 15, "img": ["2_q15_0.webp"], "exp": ["2_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}]}, {"id": "3", "questions": [{"n": 1, "img": ["3_q1_0.webp"], "exp": ["3_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 2, "img": ["3_q2_0.webp"], "exp": ["3_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "C"}, {"n": 3, "img": ["3_q3_0.webp"], "exp": ["3_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 4, "img": ["3_q4_0.webp"], "exp": ["3_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 5, "img": ["3_q5_0.webp"], "exp": ["3_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 6, "img": ["3_q6_0.webp"], "exp": ["3_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 7, "img": ["3_q7_0.webp"], "exp": ["3_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 8, "img": ["3_q8_0.webp"], "exp": ["3_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 9, "img": ["3_q9_0.webp"], "exp": ["3_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 10, "img": ["3_q10_0.webp"], "exp": ["3_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 11, "img": ["3_q11_0.webp"], "exp": ["3_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 12, "img": ["3_q12_0.webp"], "exp": ["3_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 13, "img": ["3_q13_0.webp"], "exp": ["3_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 14, "img": ["3_q14_0.webp"], "exp": ["3_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}, {"n": 15, "img": ["3_q15_0.webp"], "exp": ["3_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "4", "questions": [{"n": 1, "img": ["4_q1_0.webp"], "exp": ["4_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 2, "img": ["4_q2_0.webp"], "exp": ["4_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 3, "img": ["4_q3_0.webp"], "exp": ["4_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "C"}, {"n": 4, "img": ["4_q4_0.webp"], "exp": ["4_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 5, "img": ["4_q5_0.webp"], "exp": ["4_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 6, "img": ["4_q6_0.webp"], "exp": ["4_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 7, "img": ["4_q7_0.webp"], "exp": ["4_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 8, "img": ["4_q8_0.webp"], "exp": ["4_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 9, "img": ["4_q9_0.webp"], "exp": ["4_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 10, "img": ["4_q10_0.webp"], "exp": ["4_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 11, "img": ["4_q11_0.webp"], "exp": ["4_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 12, "img": ["4_q12_0.webp"], "exp": ["4_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 13, "img": ["4_q13_0.webp"], "exp": ["4_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 14, "img": ["4_q14_0.webp"], "exp": ["4_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}, {"n": 15, "img": ["4_q15_0.webp"], "exp": ["4_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "5", "questions": [{"n": 1, "img": ["5_q1_0.webp"], "exp": ["5_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["5_q2_0.webp"], "exp": ["5_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "C"}, {"n": 3, "img": ["5_q3_0.webp"], "exp": ["5_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "C"}, {"n": 4, "img": ["5_q4_0.webp"], "exp": ["5_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 5, "img": ["5_q5_0.webp"], "exp": ["5_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 6, "img": ["5_q6_0.webp"], "exp": ["5_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 7, "img": ["5_q7_0.webp"], "exp": ["5_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 8, "img": ["5_q8_0.webp"], "exp": ["5_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 9, "img": ["5_q9_0.webp"], "exp": ["5_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 10, "img": ["5_q10_0.webp"], "exp": ["5_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 11, "img": ["5_q11_0.webp"], "exp": ["5_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 12, "img": ["5_q12_0.webp"], "exp": ["5_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 13, "img": ["5_q13_0.webp"], "exp": ["5_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 14, "img": ["5_q14_0.webp"], "exp": ["5_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}, {"n": 15, "img": ["5_q15_0.webp"], "exp": ["5_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "6", "questions": [{"n": 1, "img": ["6_q1_0.webp"], "exp": ["6_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 2, "img": ["6_q2_0.webp"], "exp": ["6_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["6_q3_0.webp"], "exp": ["6_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 4, "img": ["6_q4_0.webp"], "exp": ["6_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 5, "img": ["6_q5_0.webp"], "exp": ["6_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 6, "img": ["6_q6_0.webp"], "exp": ["6_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 7, "img": ["6_q7_0.webp"], "exp": ["6_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 8, "img": ["6_q8_0.webp"], "exp": ["6_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 9, "img": ["6_q9_0.webp"], "exp": ["6_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 10, "img": ["6_q10_0.webp"], "exp": ["6_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 11, "img": ["6_q11_0.webp"], "exp": ["6_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 12, "img": ["6_q12_0.webp"], "exp": ["6_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 13, "img": ["6_q13_0.webp"], "exp": ["6_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 14, "img": ["6_q14_0.webp"], "exp": ["6_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}, {"n": 15, "img": ["6_q15_0.webp"], "exp": ["6_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}]}, {"id": "7", "questions": [{"n": 1, "img": ["7_q1_0.webp"], "exp": ["7_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["7_q2_0.webp"], "exp": ["7_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 3, "img": ["7_q3_0.webp"], "exp": ["7_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 4, "img": ["7_q4_0.webp"], "exp": ["7_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 5, "img": ["7_q5_0.webp"], "exp": ["7_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 6, "img": ["7_q6_0.webp"], "exp": ["7_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 7, "img": ["7_q7_0.webp"], "exp": ["7_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 8, "img": ["7_q8_0.webp"], "exp": ["7_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 9, "img": ["7_q9_0.webp"], "exp": ["7_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 10, "img": ["7_q10_0.webp"], "exp": ["7_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 11, "img": ["7_q11_0.webp"], "exp": ["7_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 12, "img": ["7_q12_0.webp"], "exp": ["7_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 13, "img": ["7_q13_0.webp"], "exp": ["7_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 14, "img": ["7_q14_0.webp"], "exp": ["7_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}, {"n": 15, "img": ["7_q15_0.webp"], "exp": ["7_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}]}, {"id": "8", "questions": [{"n": 1, "img": ["8_q1_0.webp"], "exp": ["8_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 2, "img": ["8_q2_0.webp"], "exp": ["8_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["8_q3_0.webp"], "exp": ["8_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "C"}, {"n": 4, "img": ["8_q4_0.webp"], "exp": ["8_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 5, "img": ["8_q5_0.webp"], "exp": ["8_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 6, "img": ["8_q6_0.webp"], "exp": ["8_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 7, "img": ["8_q7_0.webp"], "exp": ["8_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 8, "img": ["8_q8_0.webp"], "exp": ["8_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 9, "img": ["8_q9_0.webp"], "exp": ["8_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 10, "img": ["8_q10_0.webp"], "exp": ["8_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 11, "img": ["8_q11_0.webp"], "exp": ["8_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 12, "img": ["8_q12_0.webp"], "exp": ["8_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 13, "img": ["8_q13_0.webp"], "exp": ["8_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 14, "img": ["8_q14_0.webp"], "exp": ["8_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}, {"n": 15, "img": ["8_q15_0.webp"], "exp": ["8_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}]}, {"id": "9", "questions": [{"n": 1, "img": ["9_q1_0.webp"], "exp": ["9_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["9_q2_0.webp"], "exp": ["9_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 3, "img": ["9_q3_0.webp"], "exp": ["9_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "A"}, {"n": 4, "img": ["9_q4_0.webp"], "exp": ["9_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 5, "img": ["9_q5_0.webp"], "exp": ["9_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 6, "img": ["9_q6_0.webp"], "exp": ["9_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 7, "img": ["9_q7_0.webp"], "exp": ["9_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 8, "img": ["9_q8_0.webp"], "exp": ["9_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 9, "img": ["9_q9_0.webp"], "exp": ["9_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 10, "img": ["9_q10_0.webp"], "exp": ["9_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 11, "img": ["9_q11_0.webp"], "exp": ["9_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 12, "img": ["9_q12_0.webp"], "exp": ["9_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 13, "img": ["9_q13_0.webp"], "exp": ["9_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 14, "img": ["9_q14_0.webp"], "exp": ["9_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}, {"n": 15, "img": ["9_q15_0.webp"], "exp": ["9_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}]}, {"id": "10", "questions": [{"n": 1, "img": ["10_q1_0.webp"], "exp": ["10_e1_0.webp"], "pts": 1.0, "type": "B", "ans": "C"}, {"n": 2, "img": ["10_q2_0.webp"], "exp": ["10_e2_0.webp"], "pts": 1.0, "type": "B", "ans": "B"}, {"n": 3, "img": ["10_q3_0.webp"], "exp": ["10_e3_0.webp"], "pts": 1.0, "type": "B", "ans": "C"}, {"n": 4, "img": ["10_q4_0.webp"], "exp": ["10_e4_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 5, "img": ["10_q5_0.webp"], "exp": ["10_e5_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 6, "img": ["10_q6_0.webp"], "exp": ["10_e6_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 7, "img": ["10_q7_0.webp"], "exp": ["10_e7_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 8, "img": ["10_q8_0.webp"], "exp": ["10_e8_0.webp"], "pts": 2.0, "type": "Q", "ans": "A"}, {"n": 9, "img": ["10_q9_0.webp"], "exp": ["10_e9_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 10, "img": ["10_q10_0.webp"], "exp": ["10_e10_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 11, "img": ["10_q11_0.webp"], "exp": ["10_e11_0.webp"], "pts": 2.0, "type": "Q", "ans": "D"}, {"n": 12, "img": ["10_q12_0.webp"], "exp": ["10_e12_0.webp"], "pts": 2.0, "type": "Q", "ans": "C"}, {"n": 13, "img": ["10_q13_0.webp"], "exp": ["10_e13_0.webp"], "pts": 2.0, "type": "Q", "ans": "B"}, {"n": 14, "img": ["10_q14_0.webp"], "exp": ["10_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}, {"n": 15, "img": ["10_q15_0.webp"], "exp": ["10_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}]}], "matematika": [{"id": "demo", "questions": [{"n": 1, "img": ["demo_q1_0.webp"], "exp": ["demo_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 2, "img": ["demo_q2_0.webp"], "exp": ["demo_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 3, "img": ["demo_q3_0.webp"], "exp": ["demo_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 4, "img": ["demo_q4_0.webp"], "exp": ["demo_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 5, "img": ["demo_q5_0.webp"], "exp": ["demo_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 6, "img": ["demo_q6_0.webp"], "exp": ["demo_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 7, "img": ["demo_q7_0.webp"], "exp": ["demo_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 8, "img": ["demo_q8_0.webp"], "exp": ["demo_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 9, "img": ["demo_q9_0.webp"], "exp": ["demo_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 10, "img": ["demo_q10_0.webp"], "exp": ["demo_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 11, "img": ["demo_q11_0.webp"], "exp": ["demo_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 12, "img": ["demo_q12_0.webp"], "exp": ["demo_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 13, "img": ["demo_q13_0.webp"], "exp": ["demo_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "A"}, {"n": 14, "img": ["demo_q14_0.webp"], "exp": ["demo_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 15, "img": ["demo_q15_0.webp"], "exp": ["demo_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 16, "img": ["demo_q16_0.webp"], "exp": ["demo_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 17, "img": ["demo_q17_0.webp"], "exp": ["demo_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 18, "img": ["demo_q18_0.webp"], "exp": ["demo_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 19, "img": ["demo_q19_0.webp"], "exp": ["demo_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "A"}, {"n": 20, "img": ["demo_q20_0.webp"], "exp": ["demo_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}]}, {"id": "1", "questions": [{"n": 1, "img": ["1_q1_0.webp"], "exp": ["1_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 2, "img": ["1_q2_0.webp"], "exp": ["1_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 3, "img": ["1_q3_0.webp"], "exp": ["1_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "D"}, {"n": 4, "img": ["1_q4_0.webp"], "exp": ["1_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 5, "img": ["1_q5_0.webp"], "exp": ["1_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 6, "img": ["1_q6_0.webp"], "exp": ["1_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 7, "img": ["1_q7_0.webp"], "exp": ["1_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 8, "img": ["1_q8_0.webp"], "exp": ["1_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 9, "img": ["1_q9_0.webp"], "exp": ["1_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 10, "img": ["1_q10_0.webp"], "exp": ["1_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 11, "img": ["1_q11_0.webp"], "exp": ["1_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 12, "img": ["1_q12_0.webp"], "exp": ["1_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 13, "img": ["1_q13_0.webp"], "exp": ["1_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "A"}, {"n": 14, "img": ["1_q14_0.webp"], "exp": ["1_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 15, "img": ["1_q15_0.webp"], "exp": ["1_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}, {"n": 16, "img": ["1_q16_0.webp"], "exp": ["1_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "D"}, {"n": 17, "img": ["1_q17_0.webp"], "exp": ["1_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 18, "img": ["1_q18_0.webp"], "exp": ["1_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 19, "img": ["1_q19_0.webp"], "exp": ["1_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "C"}, {"n": 20, "img": ["1_q20_0.webp"], "exp": ["1_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}]}, {"id": "2", "questions": [{"n": 1, "img": ["2_q1_0.webp"], "exp": ["2_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 2, "img": ["2_q2_0.webp"], "exp": ["2_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 3, "img": ["2_q3_0.webp"], "exp": ["2_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "C"}, {"n": 4, "img": ["2_q4_0.webp"], "exp": ["2_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 5, "img": ["2_q5_0.webp"], "exp": ["2_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 6, "img": ["2_q6_0.webp"], "exp": ["2_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 7, "img": ["2_q7_0.webp"], "exp": ["2_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 8, "img": ["2_q8_0.webp"], "exp": ["2_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 9, "img": ["2_q9_0.webp"], "exp": ["2_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 10, "img": ["2_q10_0.webp"], "exp": ["2_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 11, "img": ["2_q11_0.webp"], "exp": ["2_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 12, "img": ["2_q12_0.webp"], "exp": ["2_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 13, "img": ["2_q13_0.webp"], "exp": ["2_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "D"}, {"n": 14, "img": ["2_q14_0.webp"], "exp": ["2_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}, {"n": 15, "img": ["2_q15_0.webp"], "exp": ["2_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 16, "img": ["2_q16_0.webp"], "exp": ["2_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "C"}, {"n": 17, "img": ["2_q17_0.webp"], "exp": ["2_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 18, "img": ["2_q18_0.webp"], "exp": ["2_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 19, "img": ["2_q19_0.webp"], "exp": ["2_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "C"}, {"n": 20, "img": ["2_q20_0.webp"], "exp": ["2_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}]}, {"id": "3", "questions": [{"n": 1, "img": ["3_q1_0.webp"], "exp": ["3_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 2, "img": ["3_q2_0.webp"], "exp": ["3_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 3, "img": ["3_q3_0.webp"], "exp": ["3_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "B"}, {"n": 4, "img": ["3_q4_0.webp"], "exp": ["3_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 5, "img": ["3_q5_0.webp"], "exp": ["3_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 6, "img": ["3_q6_0.webp"], "exp": ["3_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 7, "img": ["3_q7_0.webp"], "exp": ["3_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 8, "img": ["3_q8_0.webp"], "exp": ["3_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 9, "img": ["3_q9_0.webp"], "exp": ["3_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 10, "img": ["3_q10_0.webp"], "exp": ["3_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 11, "img": ["3_q11_0.webp"], "exp": ["3_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 12, "img": ["3_q12_0.webp"], "exp": ["3_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 13, "img": ["3_q13_0.webp"], "exp": ["3_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "B"}, {"n": 14, "img": ["3_q14_0.webp"], "exp": ["3_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 15, "img": ["3_q15_0.webp"], "exp": ["3_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 16, "img": ["3_q16_0.webp"], "exp": ["3_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 17, "img": ["3_q17_0.webp"], "exp": ["3_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 18, "img": ["3_q18_0.webp"], "exp": ["3_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 19, "img": ["3_q19_0.webp"], "exp": ["3_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "D"}, {"n": 20, "img": ["3_q20_0.webp"], "exp": ["3_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}]}, {"id": "4", "questions": [{"n": 1, "img": ["4_q1_0.webp"], "exp": ["4_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 2, "img": ["4_q2_0.webp"], "exp": ["4_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 3, "img": ["4_q3_0.webp"], "exp": ["4_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "B"}, {"n": 4, "img": ["4_q4_0.webp"], "exp": ["4_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 5, "img": ["4_q5_0.webp"], "exp": ["4_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 6, "img": ["4_q6_0.webp"], "exp": ["4_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 7, "img": ["4_q7_0.webp"], "exp": ["4_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 8, "img": ["4_q8_0.webp"], "exp": ["4_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 9, "img": ["4_q9_0.webp"], "exp": ["4_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 10, "img": ["4_q10_0.webp"], "exp": ["4_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 11, "img": ["4_q11_0.webp"], "exp": ["4_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 12, "img": ["4_q12_0.webp"], "exp": ["4_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 13, "img": ["4_q13_0.webp"], "exp": ["4_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "A"}, {"n": 14, "img": ["4_q14_0.webp"], "exp": ["4_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}, {"n": 15, "img": ["4_q15_0.webp"], "exp": ["4_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 16, "img": ["4_q16_0.webp"], "exp": ["4_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "C"}, {"n": 17, "img": ["4_q17_0.webp"], "exp": ["4_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 18, "img": ["4_q18_0.webp"], "exp": ["4_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}, {"n": 19, "img": ["4_q19_0.webp"], "exp": ["4_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "B"}, {"n": 20, "img": ["4_q20_0.webp"], "exp": ["4_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}]}, {"id": "5", "questions": [{"n": 1, "img": ["5_q1_0.webp"], "exp": ["5_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 2, "img": ["5_q2_0.webp"], "exp": ["5_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 3, "img": ["5_q3_0.webp"], "exp": ["5_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "C"}, {"n": 4, "img": ["5_q4_0.webp"], "exp": ["5_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 5, "img": ["5_q5_0.webp"], "exp": ["5_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 6, "img": ["5_q6_0.webp"], "exp": ["5_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 7, "img": ["5_q7_0.webp"], "exp": ["5_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 8, "img": ["5_q8_0.webp"], "exp": ["5_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 9, "img": ["5_q9_0.webp"], "exp": ["5_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 10, "img": ["5_q10_0.webp"], "exp": ["5_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 11, "img": ["5_q11_0.webp"], "exp": ["5_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 12, "img": ["5_q12_0.webp"], "exp": ["5_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 13, "img": ["5_q13_0.webp"], "exp": ["5_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "A"}, {"n": 14, "img": ["5_q14_0.webp"], "exp": ["5_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 15, "img": ["5_q15_0.webp"], "exp": ["5_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 16, "img": ["5_q16_0.webp"], "exp": ["5_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "D"}, {"n": 17, "img": ["5_q17_0.webp"], "exp": ["5_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 18, "img": ["5_q18_0.webp"], "exp": ["5_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 19, "img": ["5_q19_0.webp"], "exp": ["5_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "D"}, {"n": 20, "img": ["5_q20_0.webp"], "exp": ["5_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}]}, {"id": "6", "questions": [{"n": 1, "img": ["6_q1_0.webp"], "exp": ["6_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 2, "img": ["6_q2_0.webp"], "exp": ["6_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 3, "img": ["6_q3_0.webp"], "exp": ["6_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "D"}, {"n": 4, "img": ["6_q4_0.webp"], "exp": ["6_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 5, "img": ["6_q5_0.webp"], "exp": ["6_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 6, "img": ["6_q6_0.webp"], "exp": ["6_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 7, "img": ["6_q7_0.webp"], "exp": ["6_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 8, "img": ["6_q8_0.webp"], "exp": ["6_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 9, "img": ["6_q9_0.webp"], "exp": ["6_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 10, "img": ["6_q10_0.webp"], "exp": ["6_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 11, "img": ["6_q11_0.webp"], "exp": ["6_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 12, "img": ["6_q12_0.webp"], "exp": ["6_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 13, "img": ["6_q13_0.webp"], "exp": ["6_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "C"}, {"n": 14, "img": ["6_q14_0.webp"], "exp": ["6_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 15, "img": ["6_q15_0.webp"], "exp": ["6_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 16, "img": ["6_q16_0.webp"], "exp": ["6_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "C"}, {"n": 17, "img": ["6_q17_0.webp"], "exp": ["6_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 18, "img": ["6_q18_0.webp"], "exp": ["6_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 19, "img": ["6_q19_0.webp"], "exp": ["6_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "D"}, {"n": 20, "img": ["6_q20_0.webp"], "exp": ["6_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}]}, {"id": "7", "questions": [{"n": 1, "img": ["7_q1_0.webp"], "exp": ["7_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 2, "img": ["7_q2_0.webp"], "exp": ["7_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 3, "img": ["7_q3_0.webp"], "exp": ["7_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "D"}, {"n": 4, "img": ["7_q4_0.webp"], "exp": ["7_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 5, "img": ["7_q5_0.webp"], "exp": ["7_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 6, "img": ["7_q6_0.webp"], "exp": ["7_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 7, "img": ["7_q7_0.webp"], "exp": ["7_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 8, "img": ["7_q8_0.webp"], "exp": ["7_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 9, "img": ["7_q9_0.webp"], "exp": ["7_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 10, "img": ["7_q10_0.webp"], "exp": ["7_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 11, "img": ["7_q11_0.webp"], "exp": ["7_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 12, "img": ["7_q12_0.webp"], "exp": ["7_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 13, "img": ["7_q13_0.webp"], "exp": ["7_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "C"}, {"n": 14, "img": ["7_q14_0.webp"], "exp": ["7_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 15, "img": ["7_q15_0.webp"], "exp": ["7_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 16, "img": ["7_q16_0.webp"], "exp": ["7_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "B"}, {"n": 17, "img": ["7_q17_0.webp"], "exp": ["7_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 18, "img": ["7_q18_0.webp"], "exp": ["7_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 19, "img": ["7_q19_0.webp"], "exp": ["7_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "A"}, {"n": 20, "img": ["7_q20_0.webp"], "exp": ["7_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}]}, {"id": "8", "questions": [{"n": 1, "img": ["8_q1_0.webp"], "exp": ["8_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 2, "img": ["8_q2_0.webp"], "exp": ["8_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 3, "img": ["8_q3_0.webp"], "exp": ["8_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 4, "img": ["8_q4_0.webp"], "exp": ["8_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 5, "img": ["8_q5_0.webp"], "exp": ["8_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 6, "img": ["8_q6_0.webp"], "exp": ["8_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 7, "img": ["8_q7_0.webp"], "exp": ["8_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 8, "img": ["8_q8_0.webp"], "exp": ["8_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 9, "img": ["8_q9_0.webp"], "exp": ["8_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 10, "img": ["8_q10_0.webp"], "exp": ["8_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 11, "img": ["8_q11_0.webp"], "exp": ["8_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 12, "img": ["8_q12_0.webp"], "exp": ["8_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 13, "img": ["8_q13_0.webp"], "exp": ["8_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "C"}, {"n": 14, "img": ["8_q14_0.webp"], "exp": ["8_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 15, "img": ["8_q15_0.webp"], "exp": ["8_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 16, "img": ["8_q16_0.webp"], "exp": ["8_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 17, "img": ["8_q17_0.webp"], "exp": ["8_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 18, "img": ["8_q18_0.webp"], "exp": ["8_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "D"}, {"n": 19, "img": ["8_q19_0.webp"], "exp": ["8_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "C"}, {"n": 20, "img": ["8_q20_0.webp"], "exp": ["8_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}]}, {"id": "9", "questions": [{"n": 1, "img": ["9_q1_0.webp"], "exp": ["9_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 2, "img": ["9_q2_0.webp"], "exp": ["9_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 3, "img": ["9_q3_0.webp"], "exp": ["9_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 4, "img": ["9_q4_0.webp"], "exp": ["9_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 5, "img": ["9_q5_0.webp"], "exp": ["9_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "C"}, {"n": 6, "img": ["9_q6_0.webp"], "exp": ["9_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 7, "img": ["9_q7_0.webp"], "exp": ["9_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 8, "img": ["9_q8_0.webp"], "exp": ["9_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 9, "img": ["9_q9_0.webp"], "exp": ["9_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 10, "img": ["9_q10_0.webp"], "exp": ["9_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 11, "img": ["9_q11_0.webp"], "exp": ["9_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 12, "img": ["9_q12_0.webp"], "exp": ["9_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 13, "img": ["9_q13_0.webp"], "exp": ["9_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "A"}, {"n": 14, "img": ["9_q14_0.webp"], "exp": ["9_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}, {"n": 15, "img": ["9_q15_0.webp"], "exp": ["9_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "A"}, {"n": 16, "img": ["9_q16_0.webp"], "exp": ["9_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 17, "img": ["9_q17_0.webp"], "exp": ["9_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 18, "img": ["9_q18_0.webp"], "exp": ["9_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 19, "img": ["9_q19_0.webp"], "exp": ["9_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "D"}, {"n": 20, "img": ["9_q20_0.webp"], "exp": ["9_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}]}, {"id": "10", "questions": [{"n": 1, "img": ["10_q1_0.webp"], "exp": ["10_e1_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 2, "img": ["10_q2_0.webp"], "exp": ["10_e2_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 3, "img": ["10_q3_0.webp"], "exp": ["10_e3_0.webp"], "pts": 6.0, "type": "M", "ans": "C"}, {"n": 4, "img": ["10_q4_0.webp"], "exp": ["10_e4_0.webp"], "pts": 3.5, "type": "Q", "ans": "B"}, {"n": 5, "img": ["10_q5_0.webp"], "exp": ["10_e5_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 6, "img": ["10_q6_0.webp"], "exp": ["10_e6_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 7, "img": ["10_q7_0.webp"], "exp": ["10_e7_0.webp"], "pts": 3.5, "type": "Q", "ans": "A"}, {"n": 8, "img": ["10_q8_0.webp"], "exp": ["10_e8_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 9, "img": ["10_q9_0.webp"], "exp": ["10_e9_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 10, "img": ["10_q10_0.webp"], "exp": ["10_e10_0.webp"], "pts": 3.5, "type": "Q", "ans": "D"}, {"n": 11, "img": ["10_q11_0.webp"], "exp": ["10_e11_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 12, "img": ["10_q12_0.webp"], "exp": ["10_e12_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 13, "img": ["10_q13_0.webp"], "exp": ["10_e13_0.webp"], "pts": 4.0, "type": "B", "ans": "B"}, {"n": 14, "img": ["10_q14_0.webp"], "exp": ["10_e14_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 15, "img": ["10_q15_0.webp"], "exp": ["10_e15_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}, {"n": 16, "img": ["10_q16_0.webp"], "exp": ["10_e16_0.webp"], "pts": 6.0, "type": "M", "ans": "A"}, {"n": 17, "img": ["10_q17_0.webp"], "exp": ["10_e17_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}, {"n": 18, "img": ["10_q18_0.webp"], "exp": ["10_e18_0.webp"], "pts": 5.2, "type": "Q", "ans": "C"}, {"n": 19, "img": ["10_q19_0.webp"], "exp": ["10_e19_0.webp"], "pts": 4.0, "type": "B", "ans": "D"}, {"n": 20, "img": ["10_q20_0.webp"], "exp": ["10_e20_0.webp"], "pts": 5.2, "type": "Q", "ans": "B"}]}], "ingliz": [{"id": "demo", "questions": [{"n": 1, "img": ["demo_q1_0.webp"], "exp": ["demo_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["demo_q2_0.webp"], "exp": ["demo_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["demo_q3_0.webp"], "exp": ["demo_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 4, "img": ["demo_q4_0.webp"], "exp": ["demo_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 5, "img": ["demo_q5_0.webp"], "exp": ["demo_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 6, "img": ["demo_q6_0.webp"], "exp": ["demo_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 7, "img": ["demo_q7_0.webp"], "exp": ["demo_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 8, "img": ["demo_q8_0.webp"], "exp": ["demo_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 9, "img": ["demo_q9_0.webp"], "exp": ["demo_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 10, "img": ["demo_q10_0.webp"], "exp": ["demo_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 11, "img": ["demo_q11_0.webp"], "exp": ["demo_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 12, "img": ["demo_q12_0.webp"], "exp": ["demo_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 13, "img": ["demo_q13_0.webp"], "exp": ["demo_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 14, "img": ["demo_q14_0.webp"], "exp": ["demo_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}, {"n": 15, "img": ["demo_q15_0.webp"], "exp": ["demo_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}]}, {"id": "1", "questions": [{"n": 1, "img": ["1_q1_0.webp"], "exp": ["1_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["1_q2_0.webp"], "exp": ["1_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["1_q3_0.webp"], "exp": ["1_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 4, "img": ["1_q4_0.webp"], "exp": ["1_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 5, "img": ["1_q5_0.webp"], "exp": ["1_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 6, "img": ["1_q6_0.webp"], "exp": ["1_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 7, "img": ["1_q7_0.webp"], "exp": ["1_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 8, "img": ["1_q8_0.webp"], "exp": ["1_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 9, "img": ["1_q9_0.webp"], "exp": ["1_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 10, "img": ["1_q10_0.webp"], "exp": ["1_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 11, "img": ["1_q11_0.webp"], "exp": ["1_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 12, "img": ["1_q12_0.webp"], "exp": ["1_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 13, "img": ["1_q13_0.webp"], "exp": ["1_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 14, "img": ["1_q14_0.webp"], "exp": ["1_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}, {"n": 15, "img": ["1_q15_0.webp"], "exp": ["1_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "2", "questions": [{"n": 1, "img": ["2_q1_0.webp"], "exp": ["2_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 2, "img": ["2_q2_0.webp"], "exp": ["2_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["2_q3_0.webp"], "exp": ["2_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 4, "img": ["2_q4_0.webp"], "exp": ["2_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 5, "img": ["2_q5_0.webp"], "exp": ["2_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 6, "img": ["2_q6_0.webp"], "exp": ["2_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 7, "img": ["2_q7_0.webp"], "exp": ["2_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 8, "img": ["2_q8_0.webp"], "exp": ["2_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 9, "img": ["2_q9_0.webp"], "exp": ["2_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 10, "img": ["2_q10_0.webp"], "exp": ["2_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 11, "img": ["2_q11_0.webp"], "exp": ["2_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 12, "img": ["2_q12_0.webp"], "exp": ["2_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 13, "img": ["2_q13_0.webp"], "exp": ["2_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 14, "img": ["2_q14_0.webp"], "exp": ["2_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}, {"n": 15, "img": ["2_q15_0.webp"], "exp": ["2_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}]}, {"id": "3", "questions": [{"n": 1, "img": ["3_q1_0.webp"], "exp": ["3_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["3_q2_0.webp"], "exp": ["3_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 3, "img": ["3_q3_0.webp"], "exp": ["3_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 4, "img": ["3_q4_0.webp"], "exp": ["3_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 5, "img": ["3_q5_0.webp"], "exp": ["3_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 6, "img": ["3_q6_0.webp"], "exp": ["3_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 7, "img": ["3_q7_0.webp"], "exp": ["3_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 8, "img": ["3_q8_0.webp"], "exp": ["3_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 9, "img": ["3_q9_0.webp"], "exp": ["3_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 10, "img": ["3_q10_0.webp"], "exp": ["3_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 11, "img": ["3_q11_0.webp"], "exp": ["3_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 12, "img": ["3_q12_0.webp"], "exp": ["3_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 13, "img": ["3_q13_0.webp"], "exp": ["3_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 14, "img": ["3_q14_0.webp"], "exp": ["3_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}, {"n": 15, "img": ["3_q15_0.webp"], "exp": ["3_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}]}, {"id": "4", "questions": [{"n": 1, "img": ["4_q1_0.webp"], "exp": ["4_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 2, "img": ["4_q2_0.webp"], "exp": ["4_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 3, "img": ["4_q3_0.webp"], "exp": ["4_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 4, "img": ["4_q4_0.webp"], "exp": ["4_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 5, "img": ["4_q5_0.webp"], "exp": ["4_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 6, "img": ["4_q6_0.webp"], "exp": ["4_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 7, "img": ["4_q7_0.webp"], "exp": ["4_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 8, "img": ["4_q8_0.webp"], "exp": ["4_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 9, "img": ["4_q9_0.webp"], "exp": ["4_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 10, "img": ["4_q10_0.webp"], "exp": ["4_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 11, "img": ["4_q11_0.webp"], "exp": ["4_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 12, "img": ["4_q12_0.webp"], "exp": ["4_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 13, "img": ["4_q13_0.webp"], "exp": ["4_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 14, "img": ["4_q14_0.webp"], "exp": ["4_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}, {"n": 15, "img": ["4_q15_0.webp"], "exp": ["4_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}]}, {"id": "5", "questions": [{"n": 1, "img": ["5_q1_0.webp"], "exp": ["5_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 2, "img": ["5_q2_0.webp"], "exp": ["5_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["5_q3_0.webp"], "exp": ["5_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 4, "img": ["5_q4_0.webp"], "exp": ["5_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 5, "img": ["5_q5_0.webp"], "exp": ["5_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 6, "img": ["5_q6_0.webp"], "exp": ["5_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 7, "img": ["5_q7_0.webp"], "exp": ["5_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 8, "img": ["5_q8_0.webp"], "exp": ["5_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 9, "img": ["5_q9_0.webp"], "exp": ["5_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 10, "img": ["5_q10_0.webp"], "exp": ["5_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 11, "img": ["5_q11_0.webp"], "exp": ["5_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 12, "img": ["5_q12_0.webp"], "exp": ["5_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 13, "img": ["5_q13_0.webp"], "exp": ["5_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 14, "img": ["5_q14_0.webp"], "exp": ["5_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}, {"n": 15, "img": ["5_q15_0.webp"], "exp": ["5_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "6", "questions": [{"n": 1, "img": ["6_q1_0.webp"], "exp": ["6_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["6_q2_0.webp"], "exp": ["6_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 3, "img": ["6_q3_0.webp"], "exp": ["6_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 4, "img": ["6_q4_0.webp"], "exp": ["6_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 5, "img": ["6_q5_0.webp"], "exp": ["6_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 6, "img": ["6_q6_0.webp"], "exp": ["6_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 7, "img": ["6_q7_0.webp"], "exp": ["6_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 8, "img": ["6_q8_0.webp"], "exp": ["6_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 9, "img": ["6_q9_0.webp"], "exp": ["6_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 10, "img": ["6_q10_0.webp"], "exp": ["6_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 11, "img": ["6_q11_0.webp"], "exp": ["6_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 12, "img": ["6_q12_0.webp"], "exp": ["6_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 13, "img": ["6_q13_0.webp"], "exp": ["6_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 14, "img": ["6_q14_0.webp"], "exp": ["6_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}, {"n": 15, "img": ["6_q15_0.webp"], "exp": ["6_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}]}, {"id": "7", "questions": [{"n": 1, "img": ["7_q1_0.webp"], "exp": ["7_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 2, "img": ["7_q2_0.webp"], "exp": ["7_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 3, "img": ["7_q3_0.webp"], "exp": ["7_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 4, "img": ["7_q4_0.webp"], "exp": ["7_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 5, "img": ["7_q5_0.webp"], "exp": ["7_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 6, "img": ["7_q6_0.webp"], "exp": ["7_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 7, "img": ["7_q7_0.webp"], "exp": ["7_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 8, "img": ["7_q8_0.webp"], "exp": ["7_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 9, "img": ["7_q9_0.webp"], "exp": ["7_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 10, "img": ["7_q10_0.webp"], "exp": ["7_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 11, "img": ["7_q11_0.webp"], "exp": ["7_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 12, "img": ["7_q12_0.webp"], "exp": ["7_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 13, "img": ["7_q13_0.webp"], "exp": ["7_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 14, "img": ["7_q14_0.webp"], "exp": ["7_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}, {"n": 15, "img": ["7_q15_0.webp"], "exp": ["7_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "8", "questions": [{"n": 1, "img": ["8_q1_0.webp"], "exp": ["8_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "D"}, {"n": 2, "img": ["8_q2_0.webp"], "exp": ["8_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 3, "img": ["8_q3_0.webp"], "exp": ["8_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 4, "img": ["8_q4_0.webp"], "exp": ["8_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 5, "img": ["8_q5_0.webp"], "exp": ["8_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 6, "img": ["8_q6_0.webp"], "exp": ["8_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 7, "img": ["8_q7_0.webp"], "exp": ["8_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 8, "img": ["8_q8_0.webp"], "exp": ["8_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 9, "img": ["8_q9_0.webp"], "exp": ["8_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 10, "img": ["8_q10_0.webp"], "exp": ["8_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 11, "img": ["8_q11_0.webp"], "exp": ["8_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 12, "img": ["8_q12_0.webp"], "exp": ["8_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 13, "img": ["8_q13_0.webp"], "exp": ["8_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 14, "img": ["8_q14_0.webp"], "exp": ["8_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}, {"n": 15, "img": ["8_q15_0.webp"], "exp": ["8_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}]}, {"id": "9", "questions": [{"n": 1, "img": ["9_q1_0.webp"], "exp": ["9_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 2, "img": ["9_q2_0.webp"], "exp": ["9_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "C"}, {"n": 3, "img": ["9_q3_0.webp"], "exp": ["9_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "A"}, {"n": 4, "img": ["9_q4_0.webp"], "exp": ["9_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 5, "img": ["9_q5_0.webp"], "exp": ["9_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 6, "img": ["9_q6_0.webp"], "exp": ["9_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "B"}, {"n": 7, "img": ["9_q7_0.webp"], "exp": ["9_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 8, "img": ["9_q8_0.webp"], "exp": ["9_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 9, "img": ["9_q9_0.webp"], "exp": ["9_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 10, "img": ["9_q10_0.webp"], "exp": ["9_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 11, "img": ["9_q11_0.webp"], "exp": ["9_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 12, "img": ["9_q12_0.webp"], "exp": ["9_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 13, "img": ["9_q13_0.webp"], "exp": ["9_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 14, "img": ["9_q14_0.webp"], "exp": ["9_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "C"}, {"n": 15, "img": ["9_q15_0.webp"], "exp": ["9_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "B"}]}, {"id": "10", "questions": [{"n": 1, "img": ["10_q1_0.webp"], "exp": ["10_e1_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 2, "img": ["10_q2_0.webp"], "exp": ["10_e2_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 3, "img": ["10_q3_0.webp"], "exp": ["10_e3_0.webp"], "pts": 2.0, "type": "B", "ans": "B"}, {"n": 4, "img": ["10_q4_0.webp"], "exp": ["10_e4_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 5, "img": ["10_q5_0.webp"], "exp": ["10_e5_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 6, "img": ["10_q6_0.webp"], "exp": ["10_e6_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 7, "img": ["10_q7_0.webp"], "exp": ["10_e7_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 8, "img": ["10_q8_0.webp"], "exp": ["10_e8_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 9, "img": ["10_q9_0.webp"], "exp": ["10_e9_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 10, "img": ["10_q10_0.webp"], "exp": ["10_e10_0.webp"], "pts": 2.8, "type": "Q", "ans": "C"}, {"n": 11, "img": ["10_q11_0.webp"], "exp": ["10_e11_0.webp"], "pts": 2.8, "type": "Q", "ans": "A"}, {"n": 12, "img": ["10_q12_0.webp"], "exp": ["10_e12_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 13, "img": ["10_q13_0.webp"], "exp": ["10_e13_0.webp"], "pts": 2.8, "type": "Q", "ans": "D"}, {"n": 14, "img": ["10_q14_0.webp"], "exp": ["10_e14_0.webp"], "pts": 3.0, "type": "M", "ans": "A"}, {"n": 15, "img": ["10_q15_0.webp"], "exp": ["10_e15_0.webp"], "pts": 3.0, "type": "M", "ans": "D"}]}]};
+const EMBEDDED_IMAGES_EL = document.getElementById('embeddedImagesJson');
+const EMBEDDED_IMAGES = EMBEDDED_IMAGES_EL ? JSON.parse(EMBEDDED_IMAGES_EL.textContent) : null;
+
+const SUBJECTS = {
+  fizika: {
+    id: 'fizika',
+    name: 'Fizika',
+    icon: '⚛️',
+    color: '#3b82f6',
+    badgeBg: 'rgba(59, 130, 246, 0.14)',
+    minutes: 40,
+    desc: 'Mexanika, molekulyar fizika, elektr va magnetizm bo\'yicha CHSB test variantlari'
+  },
+  matematika: {
+    id: 'matematika',
+    name: 'Matematika',
+    icon: '📐',
+    color: '#8b5cf6',
+    badgeBg: 'rgba(139, 92, 246, 0.14)',
+    minutes: 45,
+    desc: 'Algebraik ifodalar, progressiyalar, funksiyalar va geometriya bo\'yicha CHSB variantlari'
+  },
+  ingliz: {
+    id: 'ingliz',
+    name: 'Ingliz tili',
+    icon: '🇬🇧',
+    color: '#f59e0b',
+    badgeBg: 'rgba(245, 158, 11, 0.14)',
+    minutes: 45,
+    desc: 'Grammar, Vocabulary, Reading va Situational communication bo\'yicha CHSB variantlari'
+  }
+};
+
+const TYPE_LABELS = {
+  B: { label: 'Bilish (B)', color: '#10b981' },
+  Q: { label: 'Qo\'llash (Q)', color: '#3b82f6' },
+  M: { label: 'Mulohaza (M)', color: '#f59e0b' }
+};
+
+// ============================================================================
+// 2. SAFE STORAGE, API SYNC & HELPERS
+// ============================================================================
+function safeGetStorage(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function safeSetStorage(key, val) {
+  try {
+    localStorage.setItem(key, JSON.stringify(val));
+  } catch (e) {}
+}
+
+let currentUser = safeGetStorage('chsb_user_v2', null) || safeGetStorage('chsb_user', null);
+let resultsCache = { fizika: [], matematika: [], ingliz: [] };
+let activeTest = null;
+let timerInterval = null;
+let currentImportSubject = null;
+let homeLeaderboardSubject = 'fizika';
+let homeLeaderboardVariant = '';
+let autoDownloadJson = safeGetStorage('chsb_auto_json', false);
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+function fmtScore(x) {
+  const num = Number(x) || 0;
+  return (Math.round(num * 10) / 10).toString().replace('.', ',');
+}
+
+function mmss(seconds) {
+  const s = Math.max(0, Math.floor(Number(seconds) || 0));
+  return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+}
+
+function variantTitle(vid) {
+  return vid === 'demo' ? 'Demo variant' : `${vid}-variant`;
+}
+
+function getImgSrc(subj, filename) {
+  const key = `${subj}/${filename}`;
+  if (EMBEDDED_IMAGES && EMBEDDED_IMAGES[key]) {
+    return 'data:image/webp;base64,' + EMBEDDED_IMAGES[key];
+  }
+  return `data/img/${subj}/${filename}`;
+}
+
+function getSubjectData(subj) {
+  return EMBEDDED_DATA[subj] || [];
+}
+
+function showToast(message, kind = 'info') {
+  const box = document.getElementById('toastContainer');
+  if (!box) return;
+  const colors = {
+    ok: 'border-emerald-500 bg-emerald-950/95 text-emerald-100',
+    warn: 'border-amber-500 bg-amber-950/95 text-amber-100',
+    err: 'border-rose-500 bg-rose-950/95 text-rose-100',
+    info: 'border-indigo-500 bg-slate-900/95 text-slate-100'
+  };
+  const el = document.createElement('div');
+  el.className = `pointer-events-auto border-l-4 rounded-xl px-4 py-3 shadow-xl text-sm font-medium animate-fade ${colors[kind] || colors.info}`;
+  el.textContent = message;
+  box.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.25s';
+    setTimeout(() => el.remove(), 260);
+  }, 3400);
+}
+
+// Fetch results from both localStorage and optional Python server.py
+async function loadSubjectResults(subj) {
+  let serverList = [];
+  if (location.protocol.startsWith('http')) {
+    try {
+      const apiPath = ['/api/results', subj].join('/');
+      const resp = await fetch(apiPath, { cache: 'no-store' });
+      if (resp.ok) {
+        const parsed = await resp.json();
+        if (Array.isArray(parsed)) serverList = parsed;
+      }
+    } catch (e) {}
+  }
+  const localV2 = safeGetStorage(`chsb_results_${subj}`, []);
+  const localV1 = safeGetStorage(`local_${subj}`, []);
+  const combined = [...serverList, ...localV2, ...localV1];
+
+  // Deduplicate identical attempts by name + variant + score + time + date
+  const seen = new Set();
+  const deduped = [];
+  for (const r of combined) {
+    if (!r || !r.name) continue;
+    const sig = `${r.name.trim().toLowerCase()}|${r.variant}|${r.score}|${r.time}|${r.date || ''}`;
+    if (!seen.has(sig)) {
+      seen.add(sig);
+      deduped.push({
+        name: String(r.name).trim(),
+        subject: subj,
+        variant: String(r.variant || '1'),
+        score: Number(r.score) || 0,
+        total: Number(r.total) || 1,
+        correct: Number(r.correct) || 0,
+        wrong: Number(r.wrong) || 0,
+        skipped: Number(r.skipped) || 0,
+        time: Number(r.time) || 0,
+        date: r.date || new Date().toISOString().slice(0, 19).replace('T', ' ')
+      });
+    }
+  }
+  safeSetStorage(`chsb_results_${subj}`, deduped);
+  resultsCache[subj] = deduped;
+  return deduped;
+}
+
+async function loadAllResults() {
+  await Promise.all(Object.keys(SUBJECTS).map(s => loadSubjectResults(s)));
+}
+
+async function saveTestResult(rec) {
+  const subj = rec.subject;
+  const fullRec = {
+    ...rec,
+    date: new Date().toISOString().slice(0, 19).replace('T', ' ')
+  };
+  const existing = await loadSubjectResults(subj);
+  existing.push(fullRec);
+  safeSetStorage(`chsb_results_${subj}`, existing);
+  safeSetStorage(`local_${subj}`, existing);
+  resultsCache[subj] = existing;
+
+  let savedToServer = false;
+  if (location.protocol.startsWith('http')) {
+    try {
+      const apiPath = ['/api', 'result'].join('/');
+      const resp = await fetch(apiPath, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fullRec)
+      });
+      if (resp.ok) savedToServer = true;
+    } catch (e) {}
+  }
+
+  if (autoDownloadJson) {
+    exportSubjectJson(subj, true);
+  }
+  return savedToServer ? 'server' : 'local';
+}
+
+// Compute leaderboard (best score per student, tie-breaker: faster time)
+function computeLeaderboard(records, variantFilter = '', searchQuery = '') {
+  const bestByStudent = {};
+  const q = searchQuery.trim().toLowerCase();
+  for (const r of records) {
+    if (!r || !r.name) continue;
+    if (variantFilter && String(r.variant) !== String(variantFilter)) continue;
+    if (q && !r.name.toLowerCase().includes(q)) continue;
+    const key = r.name.trim().toLowerCase();
+    const cur = bestByStudent[key];
+    if (
+      !cur ||
+      r.score > cur.score ||
+      (r.score === cur.score && r.time < cur.time)
+    ) {
+      bestByStudent[key] = r;
+    }
+  }
+  return Object.values(bestByStudent).sort((a, b) => (b.score - a.score) || (a.time - b.time));
+}
+
+// Export JSON file for a subject (or all subjects)
+function exportSubjectJson(subj, silent = false) {
+  const data = resultsCache[subj] || safeGetStorage(`chsb_results_${subj}`, []);
+  const jsonStr = JSON.stringify(data, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${subj}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  if (!silent) {
+    showToast(`${SUBJECTS[subj].name} natijalari (${data.length} ta yozuv) ${subj}.json fayliga saqlandi!`, 'ok');
+  }
+}
+
+function exportAllJson() {
+  const allData = {
+    exportedAt: new Date().toISOString(),
+    fizika: resultsCache.fizika || [],
+    matematika: resultsCache.matematika || [],
+    ingliz: resultsCache.ingliz || []
+  };
+  const blob = new Blob([JSON.stringify(allData, null, 2)], { type: 'application/json;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'chsb_barcha_natijalar.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showToast('Barcha fanlar natijalari chsb_barcha_natijalar.json fayliga yuklab olindi!', 'ok');
+}
+
+function triggerImportJson(subj = null) {
+  currentImportSubject = subj;
+  const inp = document.getElementById('jsonFileInput');
+  if (inp) {
+    inp.value = '';
+    inp.click();
+  }
+}
+
+// ============================================================================
+// 3. MODALS (Name Input, Custom Confirm, JSON Database Manager, Image Zoom)
+// ============================================================================
+function renderHeaderUser() {
+  const box = document.getElementById('userHeaderBox');
+  if (!box) return;
+  if (currentUser && currentUser.name) {
+    box.innerHTML = `
+      <div class="flex items-center gap-2 surface-card2 px-3 py-1.5 rounded-lg text-sm">
+        <span class="font-semibold text-indigo-400">👤 ${esc(currentUser.name)}</span>
+        <button type="button" id="editUserBtn" class="text-xs px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 font-medium transition">
+          O'zgartirish
+        </button>
+      </div>
+    `;
+    const btn = document.getElementById('editUserBtn');
+    if (btn) btn.addEventListener('click', () => openNameModal(true));
+  } else {
+    box.innerHTML = `
+      <button type="button" id="loginUserBtn" class="px-3 py-1.5 rounded-lg text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition">
+        👤 Ism kiritish
+      </button>
+    `;
+    const btn = document.getElementById('loginUserBtn');
+    if (btn) btn.addEventListener('click', () => openNameModal(true));
+  }
+}
+
+function openNameModal(force = false) {
+  return new Promise(resolve => {
+    if (currentUser && currentUser.name && !force) {
+      resolve(currentUser);
+      return;
+    }
+    const modal = document.getElementById('modalRoot');
+    const parts = (currentUser && currentUser.name ? currentUser.name.trim() : '').split(/\s+/);
+    const firstName = parts[0] || '';
+    const lastName = parts.slice(1).join(' ') || '';
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modal.innerHTML = `
+      <div class="surface-card rounded-2xl max-w-md w-full p-6 shadow-2xl animate-fade">
+        <div class="flex items-center justify-between mb-2">
+          <h2 class="text-xl font-extrabold">👋 Xush kelibsiz!</h2>
+          ${currentUser && currentUser.name ? `<button type="button" id="closeNameModalBtn" class="text-muted hover:text-white text-lg font-bold">✕</button>` : ''}
+        </div>
+        <p class="text-sm text-muted mb-4">
+          Test natijalaringiz JSON faylga va fanlar reytingiga yozilishi uchun ism va familiyangizni kiriting.
+        </p>
+        <div id="nameModalErr" class="hidden mb-3 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-300 px-3 py-2 text-xs font-medium">
+          Iltimos, ism va familiyangizni to'liq kiriting!
+        </div>
+        <div class="space-y-3">
+          <div>
+            <label for="firstNameInput" class="block text-xs font-semibold uppercase tracking-wider text-muted mb-1">Ism</label>
+            <input id="firstNameInput" type="text" maxlength="30" placeholder="Masalan: Sardor" value="${esc(firstName)}"
+              class="w-full px-3.5 py-2.5 rounded-xl surface-card2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm font-medium">
+          </div>
+          <div>
+            <label for="lastNameInput" class="block text-xs font-semibold uppercase tracking-wider text-muted mb-1">Familiya</label>
+            <input id="lastNameInput" type="text" maxlength="35" placeholder="Masalan: Karimov" value="${esc(lastName)}"
+              class="w-full px-3.5 py-2.5 rounded-xl surface-card2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm font-medium">
+          </div>
+          <button type="button" id="saveNameBtn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg shadow-indigo-600/25 transition mt-2">
+            Saqlash va davom etish →
+          </button>
+        </div>
+      </div>
+    `;
+
+    const fnEl = document.getElementById('firstNameInput');
+    const lnEl = document.getElementById('lastNameInput');
+    const errEl = document.getElementById('nameModalErr');
+    const saveBtn = document.getElementById('saveNameBtn');
+    const closeBtn = document.getElementById('closeNameModalBtn');
+
+    const submit = () => {
+      const f = fnEl.value.trim();
+      const l = lnEl.value.trim();
+      if (!f || !l) {
+        errEl.classList.remove('hidden');
+        (!f ? fnEl : lnEl).focus();
+        return;
+      }
+      currentUser = { name: `${f} ${l}`, firstName: f, lastName: l };
+      safeSetStorage('chsb_user_v2', currentUser);
+      safeSetStorage('chsb_user', currentUser);
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.innerHTML = '';
+      renderHeaderUser();
+      showToast(`Foydalanuvchi: ${currentUser.name}`, 'ok');
+      resolve(currentUser);
+    };
+
+    saveBtn.addEventListener('click', submit);
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        modal.innerHTML = '';
+        resolve(currentUser);
+      });
+    }
+    modal.onkeydown = e => {
+      if (e.key === 'Enter') submit();
+    };
+    setTimeout(() => fnEl.focus(), 40);
+  });
+}
+
+function openConfirmModal({ title, message, confirmText = 'Tasdiqlash', cancelText = 'Bekor qilish', danger = false }) {
+  return new Promise(resolve => {
+    const modal = document.getElementById('modalRoot');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modal.innerHTML = `
+      <div class="surface-card rounded-2xl max-w-md w-full p-6 shadow-2xl animate-fade">
+        <h3 class="text-lg font-extrabold mb-2">${esc(title)}</h3>
+        <p class="text-sm text-muted mb-5">${esc(message)}</p>
+        <div class="flex items-center justify-end gap-3">
+          <button type="button" id="confirmCancelBtn" class="px-4 py-2.5 rounded-xl surface-card2 font-semibold text-sm hover:border-slate-400 transition">
+            ${esc(cancelText)}
+          </button>
+          <button type="button" id="confirmOkBtn" class="px-5 py-2.5 rounded-xl font-bold text-sm text-white transition ${danger ? 'bg-rose-600 hover:bg-rose-500' : 'bg-emerald-600 hover:bg-emerald-500'}">
+            ${esc(confirmText)}
+          </button>
+        </div>
+      </div>
+    `;
+    const close = val => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.innerHTML = '';
+      resolve(val);
+    };
+    document.getElementById('confirmCancelBtn').addEventListener('click', () => close(false));
+    document.getElementById('confirmOkBtn').addEventListener('click', () => close(true));
+  });
+}
+
+function openJsonManagerModal() {
+  const modal = document.getElementById('modalRoot');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+
+  const counts = {
+    fizika: (resultsCache.fizika || []).length,
+    matematika: (resultsCache.matematika || []).length,
+    ingliz: (resultsCache.ingliz || []).length
+  };
+
+  modal.innerHTML = `
+    <div class="surface-card rounded-2xl max-w-xl w-full p-6 shadow-2xl animate-fade max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-xl font-extrabold">💾 JSON Natijalar Bazasini Boshqarish</h3>
+        <button type="button" id="closeJsonModalBtn" class="text-muted hover:text-white text-lg font-bold">✕</button>
+      </div>
+      <p class="text-sm text-muted mb-4">
+        Har bir fan bo'yicha yechilgan test natijalarini alohida <code>.json</code> fayl sifatida yuklab olishingiz yoki oldingi saqlangan <code>.json</code> faylni yuklab reytingni tiklashingiz mumkin.
+      </p>
+
+      <label class="flex items-center justify-between gap-3 p-3.5 rounded-xl surface-card2 mb-4 cursor-pointer">
+        <div>
+          <div class="text-sm font-bold">Test tugaganda JSON faylni avtomatik yuklab olish</div>
+          <div class="text-xs text-muted">Har safar test yakunlanganda <code>&lt;fan&gt;.json</code> fayli avtomatik saqlanadi</div>
+        </div>
+        <input type="checkbox" id="autoJsonCheckbox" ${autoDownloadJson ? 'checked' : ''} class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
+      </label>
+
+      <div class="space-y-2.5 mb-5">
+        ${Object.values(SUBJECTS).map(s => `
+          <div class="flex flex-wrap items-center justify-between gap-2 p-3.5 rounded-xl surface-card2">
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">${s.icon}</span>
+              <div>
+                <div class="font-bold text-sm">${s.name} (<code>${s.id}.json</code>)</div>
+                <div class="text-xs text-muted">${counts[s.id]} ta natija saqlangan</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" data-export-subj="${s.id}" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition">
+                📥 ${s.id}.json yuklab olish
+              </button>
+              <button type="button" data-import-subj="${s.id}" class="px-3 py-1.5 rounded-lg surface-card hover:border-indigo-500 text-xs font-semibold transition">
+                📤 Import
+              </button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-subtle">
+        <button type="button" id="exportAllJsonBtn" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">
+          📦 Barcha fanlarni bitta JSONda yuklab olish
+        </button>
+        <button type="button" id="importAnyJsonBtn" class="px-4 py-2 rounded-xl surface-card2 hover:border-indigo-500 text-xs font-semibold transition">
+          📂 JSON fayldan yuklash
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('closeJsonModalBtn').addEventListener('click', () => {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    modal.innerHTML = '';
+  });
+
+  document.getElementById('autoJsonCheckbox').addEventListener('change', e => {
+    autoDownloadJson = !!e.target.checked;
+    safeSetStorage('chsb_auto_json', autoDownloadJson);
+    showToast(autoDownloadJson ? 'Avtomatik JSON yuklab olish yoqildi!' : 'Avtomatik JSON yuklab olish o\'chirildi', 'info');
+  });
+
+  modal.querySelectorAll('[data-export-subj]').forEach(btn => {
+    btn.addEventListener('click', () => exportSubjectJson(btn.getAttribute('data-export-subj')));
+  });
+  modal.querySelectorAll('[data-import-subj]').forEach(btn => {
+    btn.addEventListener('click', () => triggerImportJson(btn.getAttribute('data-import-subj')));
+  });
+  document.getElementById('exportAllJsonBtn').addEventListener('click', exportAllJson);
+  document.getElementById('importAnyJsonBtn').addEventListener('click', () => triggerImportJson(null));
+}
+
+function openZoomModal(src) {
+  const zm = document.getElementById('zoomModal');
+  const zi = document.getElementById('zoomImg');
+  if (!zm || !zi) return;
+  zi.src = src;
+  zm.classList.remove('hidden');
+  zm.classList.add('flex');
+}
+
+// ============================================================================
+// 4. ROUTER & VIEWS (Home, Subject Variants, Test Runner, Results, Rating)
+// ============================================================================
+function navigate(hashPath) {
+  location.hash = '#/' + hashPath;
+}
+
+async function handleRoute() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  await loadAllResults();
+
+  const rawHash = location.hash.replace(/^#\/?/, '');
+  const parts = rawHash.split('/').filter(Boolean);
+
+  if (parts.length === 0) {
+    renderHomeView();
+  } else if (parts[0] === 's' && SUBJECTS[parts[1]]) {
+    renderSubjectView(parts[1]);
+  } else if (parts[0] === 't' && SUBJECTS[parts[1]] && parts[2]) {
+    await startTestSession(parts[1], parts[2]);
+  } else if (parts[0] === 'r' && SUBJECTS[parts[1]]) {
+    renderRatingView(parts[1]);
+  } else {
+    renderHomeView();
+  }
+}
+
+// ----------------------------------------------------------------------------
+// VIEW 1: HOME PAGE (Subject Cards + Full Top Rating per Subject on Home Page)
+// ----------------------------------------------------------------------------
+function renderHomeView() {
+  const app = document.getElementById('app');
+
+  const totalVariants = Object.keys(SUBJECTS).reduce((acc, k) => acc + getSubjectData(k).length, 0);
+  const totalQuestions = Object.keys(SUBJECTS).reduce(
+    (acc, k) => acc + getSubjectData(k).reduce((s, v) => s + v.questions.length, 0),
+    0
+  );
+  const totalAttempts = Object.keys(SUBJECTS).reduce((acc, k) => acc + (resultsCache[k] || []).length, 0);
+
+  app.innerHTML = `
+    <div class="animate-fade space-y-8">
+      <!-- Hero Banner -->
+      <section class="surface-card rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/15 text-indigo-400 text-xs font-bold mb-3">
+            ✨ 9-SINF CHSB TAYYORGARLIK PLATFORMASI · OFFLINE &amp; JSON READY
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-2">
+            Fanlarni tanlang, variantlarni yeching va Top reytingda bellashing!
+          </h1>
+          <p class="text-sm sm:text-base text-muted mb-5">
+            Har bir fan bo'yicha <b>Demo variant</b> hamda <b>1–10-variantlar</b> jamlangan. Test yakunida to'plagan balingiz, xato va to'g'ri javoblaringiz hamda har bir savolning batafsil yechimi ko'rsatiladi va JSON bazaga saqlanadi.
+          </p>
+          <div class="flex flex-wrap gap-3 text-xs sm:text-sm font-semibold">
+            <div class="surface-card2 px-3.5 py-2 rounded-xl">📚 3 ta fan</div>
+            <div class="surface-card2 px-3.5 py-2 rounded-xl">🗂️ ${totalVariants} ta variant</div>
+            <div class="surface-card2 px-3.5 py-2 rounded-xl">📝 ${totalQuestions} ta savol + yechim</div>
+            <div class="surface-card2 px-3.5 py-2 rounded-xl">🏆 ${totalAttempts} ta saqlangan natija</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subject Cards Grid -->
+      <section>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-extrabold">📘 Fanlar va tezkor variantlar</h2>
+          <span class="text-xs text-muted">Variant ustiga bosib darhol testni boshlang</span>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5" id="homeSubjectGrid"></div>
+      </section>
+
+      <!-- Home Page Top Rating Section for Every Subject -->
+      <section class="surface-card rounded-3xl p-5 sm:p-7">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
+              🏆 Fanlar bo'yicha Top Reyting
+            </h2>
+            <p class="text-xs sm:text-sm text-muted mt-0.5">
+              Har bir o'quvchining eng yuqori natijasi ko'rsatiladi (ball teng bo'lsa — kamroq vaqt sarflagan yuqorida turadi).
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" id="homeExportJsonBtn" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition">
+              📥 JSON faylni yuklab olish
+            </button>
+            <button type="button" id="homeImportJsonBtn" class="px-3.5 py-2 rounded-xl surface-card2 hover:border-indigo-500 text-xs font-semibold transition">
+              📤 JSON yuklash (Import)
+            </button>
+          </div>
+        </div>
+
+        <!-- Subject Tabs + Variant Filter -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div class="flex flex-wrap gap-2" id="homeRatingTabs"></div>
+          <div class="flex items-center gap-2">
+            <select id="homeVariantFilter" class="surface-card2 rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Barcha variantlar</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Leaderboard Table -->
+        <div class="overflow-x-auto rounded-2xl border border-subtle">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="surface-card2 text-muted text-xs uppercase">
+                <th class="py-3 px-4 font-bold">O'rin</th>
+                <th class="py-3 px-4 font-bold">Ism va Familiya</th>
+                <th class="py-3 px-4 font-bold">Ball</th>
+                <th class="py-3 px-4 font-bold">Ko'rsatkich</th>
+                <th class="py-3 px-4 font-bold">To'g'ri / Xato</th>
+                <th class="py-3 px-4 font-bold">Variant</th>
+                <th class="py-3 px-4 font-bold">Vaqt</th>
+                <th class="py-3 px-4 font-bold">Sana</th>
+              </tr>
+            </thead>
+            <tbody id="homeRatingTbody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  `;
+
+  // Populate Subject Cards
+  const grid = document.getElementById('homeSubjectGrid');
+  Object.values(SUBJECTS).forEach(subj => {
+    const variants = getSubjectData(subj.id);
+    const rs = resultsCache[subj.id] || [];
+    const top3 = computeLeaderboard(rs).slice(0, 3);
+    const qCount = variants[0] ? variants[0].questions.length : 0;
+    const maxPts = variants[0] ? variants[0].questions.reduce((a, q) => a + q.pts, 0) : 0;
+
+    const card = document.createElement('div');
+    card.className = 'surface-card rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden transition hover:shadow-xl';
+    card.style.borderTop = `4px solid ${subj.color}`;
+
+    card.innerHTML = `
+      <div>
+        <div class="flex items-start justify-between gap-3 mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl" style="background:${subj.badgeBg}">
+              ${subj.icon}
+            </div>
+            <div>
+              <h3 class="text-xl font-extrabold">${subj.name}</h3>
+              <div class="text-xs text-muted font-medium">
+                ${variants.length} ta variant · ${qCount} savol · ${fmtScore(maxPts)} ball · ${subj.minutes} daq
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-xs text-muted mb-4">${subj.desc}</p>
+
+        <!-- Quick Variant Pills -->
+        <div class="mb-4">
+          <div class="text-xs font-bold text-muted uppercase tracking-wider mb-2">Variantni tanlang:</div>
+          <div class="flex flex-wrap gap-1.5">
+            ${variants.map(v => {
+              const myBest = currentUser
+                ? rs.filter(r => r.variant === v.id && r.name.toLowerCase() === currentUser.name.toLowerCase()).sort((a, b) => b.score - a.score)[0]
+                : null;
+              return `
+                <button type="button" data-start-subj="${subj.id}" data-start-var="${v.id}"
+                  class="px-2.5 py-1.5 rounded-lg text-xs font-bold surface-card2 hover:border-indigo-400 transition flex items-center gap-1"
+                  title="${variantTitle(v.id)}${myBest ? ` — Eng yaxshi: ${fmtScore(myBest.score)}/${fmtScore(myBest.total)}` : ''}">
+                  <span>${v.id === 'demo' ? 'Demo' : v.id + '-var'}</span>
+                  ${myBest ? `<span class="text-emerald-400">✓</span>` : ''}
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
+        <!-- Mini Top 3 Box -->
+        <div class="surface-card2 rounded-xl p-3 mb-4">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-muted">🏆 ${subj.name} Top 3</span>
+            <button type="button" data-save-subj="${subj.id}" class="text-xs text-indigo-400 hover:underline font-semibold">
+              📥 ${subj.id}.json
+            </button>
+          </div>
+          ${top3.length ? top3.map((r, idx) => `
+            <div class="flex items-center justify-between text-xs py-1 border-b last:border-b-0 border-subtle">
+              <span class="font-semibold truncate pr-2">${['🥇', '🥈', '🥉'][idx]} ${esc(r.name)} <span class="text-muted">(${variantTitle(r.variant)})</span></span>
+              <span class="font-bold whitespace-nowrap">${fmtScore(r.score)}/${fmtScore(r.total)}</span>
+            </div>
+          `).join('') : `<div class="text-xs text-muted py-1">Hali natijalar yo'q — birinchi bo'lib yeching!</div>`}
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 pt-2">
+        <button type="button" data-open-subj="${subj.id}" class="flex-1 py-2.5 px-4 rounded-xl text-white font-bold text-sm transition shadow-md" style="background:${subj.color}">
+          Barcha variantlar (${variants.length}) →
+        </button>
+        <button type="button" data-open-rating="${subj.id}" class="py-2.5 px-3.5 rounded-xl surface-card2 hover:border-indigo-400 font-bold text-sm transition" title="To'liq reyting">
+          🏆
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Wire Subject Card Buttons
+  grid.querySelectorAll('[data-open-subj]').forEach(btn => {
+    btn.addEventListener('click', () => navigate(`s/${btn.getAttribute('data-open-subj')}`));
+  });
+  grid.querySelectorAll('[data-open-rating]').forEach(btn => {
+    btn.addEventListener('click', () => navigate(`r/${btn.getAttribute('data-open-rating')}`));
+  });
+  grid.querySelectorAll('[data-save-subj]').forEach(btn => {
+    btn.addEventListener('click', () => exportSubjectJson(btn.getAttribute('data-save-subj')));
+  });
+  grid.querySelectorAll('[data-start-subj]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const s = btn.getAttribute('data-start-subj');
+      const v = btn.getAttribute('data-start-var');
+      navigate(`t/${s}/${v}`);
+    });
+  });
+
+  // Wire Home Leaderboard Section
+  const updateHomeLeaderboard = () => {
+    const tabsEl = document.getElementById('homeRatingTabs');
+    const vfEl = document.getElementById('homeVariantFilter');
+    const tbody = document.getElementById('homeRatingTbody');
+    if (!tabsEl || !vfEl || !tbody) return;
+
+    tabsEl.innerHTML = Object.values(SUBJECTS).map(s => {
+      const active = s.id === homeLeaderboardSubject;
+      const cnt = computeLeaderboard(resultsCache[s.id] || []).length;
+      return `
+        <button type="button" data-hr-tab="${s.id}"
+          class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 ${active ? 'bg-indigo-600 text-white shadow-md' : 'surface-card2 hover:border-indigo-400'}">
+          <span>${s.icon} ${s.name}</span>
+          <span class="px-2 py-0.5 rounded-full text-xs ${active ? 'bg-white/20 text-white' : 'surface-card text-muted'}">${cnt}</span>
+        </button>
+      `;
+    }).join('');
+
+    tabsEl.querySelectorAll('[data-hr-tab]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        homeLeaderboardSubject = btn.getAttribute('data-hr-tab');
+        homeLeaderboardVariant = '';
+        updateHomeLeaderboard();
+      });
+    });
+
+    const variants = getSubjectData(homeLeaderboardSubject);
+    vfEl.innerHTML = `<option value="">Barcha variantlar (${variants.length} ta)</option>` +
+      variants.map(v => `<option value="${v.id}" ${String(v.id) === String(homeLeaderboardVariant) ? 'selected' : ''}>${variantTitle(v.id)}</option>`).join('');
+
+    const rows = computeLeaderboard(resultsCache[homeLeaderboardSubject] || [], homeLeaderboardVariant).slice(0, 25);
+    if (!rows.length) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" class="py-8 px-4 text-center text-muted text-sm">
+            ${SUBJECTS[homeLeaderboardSubject].icon} <b>${SUBJECTS[homeLeaderboardSubject].name}</b> fanidan hozircha natijalar yo'q. Variantni tanlab birinchi bo'lib test yeching yoki oldingi <code>${homeLeaderboardSubject}.json</code> faylni yuklang!
+          </td>
+        </tr>
+      `;
+    } else {
+      tbody.innerHTML = rows.map((r, i) => {
+        const isMe = currentUser && r.name.toLowerCase() === currentUser.name.toLowerCase();
+        const pct = Math.round((r.score / r.total) * 100);
+        return `
+          <tr class="border-t border-subtle ${isMe ? 'bg-indigo-500/10 font-semibold' : ''}">
+            <td class="py-3 px-4 font-bold">${['🥇 1', '🥈 2', '🥉 3'][i] || (i + 1)}</td>
+            <td class="py-3 px-4 font-bold">${esc(r.name)} ${isMe ? '<span class="text-xs text-indigo-400">(Siz)</span>' : ''}</td>
+            <td class="py-3 px-4 font-extrabold text-indigo-400">${fmtScore(r.score)} / ${fmtScore(r.total)}</td>
+            <td class="py-3 px-4">
+              <span class="px-2.5 py-1 rounded-full text-xs font-bold ${pct >= 75 ? 'bg-emerald-500/20 text-emerald-400' : pct >= 50 ? 'bg-amber-500/20 text-amber-400' : 'bg-rose-500/20 text-rose-400'}">
+                ${pct}%
+              </span>
+            </td>
+            <td class="py-3 px-4 text-xs">
+              <span class="text-emerald-400 font-bold">✓ ${r.correct}</span> ·
+              <span class="text-rose-400 font-bold">✗ ${r.wrong}</span>
+            </td>
+            <td class="py-3 px-4 text-xs font-semibold">${variantTitle(r.variant)}</td>
+            <td class="py-3 px-4 tabular-nums text-xs">${mmss(r.time)}</td>
+            <td class="py-3 px-4 text-xs text-muted">${esc((r.date || '').slice(0, 16))}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+  };
+
+  document.getElementById('homeVariantFilter').addEventListener('change', e => {
+    homeLeaderboardVariant = e.target.value;
+    updateHomeLeaderboard();
+  });
+  document.getElementById('homeExportJsonBtn').addEventListener('click', () => exportSubjectJson(homeLeaderboardSubject));
+  document.getElementById('homeImportJsonBtn').addEventListener('click', () => triggerImportJson(homeLeaderboardSubject));
+
+  updateHomeLeaderboard();
+}
+
+// ----------------------------------------------------------------------------
+// VIEW 2: SUBJECT VARIANTS PAGE
+// ----------------------------------------------------------------------------
+function renderSubjectView(subjId) {
+  const subj = SUBJECTS[subjId];
+  const variants = getSubjectData(subjId);
+  const rs = resultsCache[subjId] || [];
+  const app = document.getElementById('app');
+
+  app.innerHTML = `
+    <div class="animate-fade space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <button type="button" id="backHomeBtn" class="text-xs font-bold text-indigo-400 hover:underline mb-1 inline-flex items-center gap-1">
+            ← Bosh sahifaga qaytish
+          </button>
+          <h1 class="text-2xl sm:text-3xl font-extrabold flex items-center gap-2.5">
+            <span>${subj.icon}</span>
+            <span>${subj.name} — Barcha variantlar</span>
+          </h1>
+          <p class="text-sm text-muted mt-1">
+            Jami ${variants.length} ta variant (Demo + 1–10-variantlar). Test vaqti: <b>${subj.minutes} daqiqa</b>.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" id="subjExportJsonBtn" class="px-3.5 py-2 rounded-xl surface-card2 hover:border-indigo-400 text-xs font-bold transition">
+            📥 ${subj.id}.json yuklab olish
+          </button>
+          <button type="button" id="subjRatingBtn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-bold transition">
+            🏆 ${subj.name} Top reytingi
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="variantCardsGrid">
+        ${variants.map(v => {
+          const totalPts = v.questions.reduce((a, q) => a + q.pts, 0);
+          const bCount = v.questions.filter(q => q.type === 'B').length;
+          const qCount = v.questions.filter(q => q.type === 'Q').length;
+          const mCount = v.questions.filter(q => q.type === 'M').length;
+          const myAttempts = currentUser
+            ? rs.filter(r => r.variant === v.id && r.name.toLowerCase() === currentUser.name.toLowerCase())
+            : [];
+          const best = myAttempts.slice().sort((a, b) => b.score - a.score || a.time - b.time)[0];
+          const allVariantLeader = computeLeaderboard(rs, v.id)[0];
+
+          return `
+            <div class="surface-card rounded-2xl p-5 flex flex-col justify-between hover:border-indigo-500/60 transition">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold uppercase" style="background:${subj.badgeBg};color:${subj.color}">
+                    ${v.id === 'demo' ? '★ DEMO' : '#' + v.id + '-VARIANT'}
+                  </span>
+                  <span class="text-xs font-semibold text-muted">⏱ ${subj.minutes} daqiqa</span>
+                </div>
+                <h3 class="text-lg font-extrabold mb-1">${variantTitle(v.id)}</h3>
+                <p class="text-xs text-muted mb-3">
+                  ${v.questions.length} ta savol · Maksimal <b>${fmtScore(totalPts)} ball</b>
+                </p>
+                <div class="flex flex-wrap gap-1.5 text-[11px] font-semibold mb-4">
+                  ${bCount ? `<span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400">Bilish: ${bCount}</span>` : ''}
+                  ${qCount ? `<span class="px-2 py-0.5 rounded bg-blue-500/15 text-blue-400">Qo'llash: ${qCount}</span>` : ''}
+                  ${mCount ? `<span class="px-2 py-0.5 rounded bg-amber-500/15 text-amber-400">Mulohaza: ${mCount}</span>` : ''}
+                </div>
+                ${best ? `
+                  <div class="surface-card2 rounded-xl p-2.5 mb-3 text-xs flex items-center justify-between">
+                    <span class="text-emerald-400 font-bold">✓ Sizning natijangiz:</span>
+                    <span class="font-extrabold">${fmtScore(best.score)} / ${fmtScore(best.total)} (${Math.round(best.score/best.total*100)}%)</span>
+                  </div>
+                ` : ''}
+                ${allVariantLeader ? `
+                  <div class="text-xs text-muted mb-3 truncate">
+                    🥇 Yetakchi: <b>${esc(allVariantLeader.name)}</b> (${fmtScore(allVariantLeader.score)} ball)
+                  </div>
+                ` : ''}
+              </div>
+              <button type="button" data-launch-var="${v.id}" class="w-full py-2.5 rounded-xl font-bold text-sm text-white transition shadow-md hover:opacity-95" style="background:${subj.color}">
+                ${best ? 'Qayta yechish →' : 'Testni boshlash →'}
+              </button>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('backHomeBtn').addEventListener('click', () => navigate(''));
+  document.getElementById('subjExportJsonBtn').addEventListener('click', () => exportSubjectJson(subjId));
+  document.getElementById('subjRatingBtn').addEventListener('click', () => navigate(`r/${subjId}`));
+  document.querySelectorAll('[data-launch-var]').forEach(btn => {
+    btn.addEventListener('click', () => navigate(`t/${subjId}/${btn.getAttribute('data-launch-var')}`));
+  });
+}
+
+// ----------------------------------------------------------------------------
+// VIEW 3: INTERACTIVE TEST RUNNER
+// ----------------------------------------------------------------------------
+async function startTestSession(subjId, varId) {
+  await openNameModal(false);
+  const subj = SUBJECTS[subjId];
+  const variantObj = getSubjectData(subjId).find(v => String(v.id) === String(varId));
+  if (!variantObj) {
+    navigate(`s/${subjId}`);
+    return;
+  }
+
+  activeTest = {
+    subjId,
+    varId: variantObj.id,
+    variant: variantObj,
+    answers: {},
+    currentIndex: 0,
+    secondsLeft: subj.minutes * 60,
+    startedAt: Date.now(),
+    finished: false,
+    reviewFilter: 'all',
+    expandAll: true
+  };
+
+  renderQuestionScreen();
+
+  timerInterval = setInterval(() => {
+    if (!activeTest || activeTest.finished) return;
+    const elapsed = Math.floor((Date.now() - activeTest.startedAt) / 1000);
+    activeTest.secondsLeft = Math.max(0, subj.minutes * 60 - elapsed);
+    const timerEl = document.getElementById('liveTimerText');
+    if (timerEl) {
+      timerEl.textContent = mmss(activeTest.secondsLeft);
+      if (activeTest.secondsLeft < 300) {
+        timerEl.classList.add('text-rose-500');
+      }
+    }
+    if (activeTest.secondsLeft <= 0) {
+      finishActiveTest(false);
+    }
+  }, 500);
+}
+
+function renderQuestionScreen() {
+  if (!activeTest || activeTest.finished) return;
+  const { subjId, varId, variant, answers, currentIndex, secondsLeft } = activeTest;
+  const subj = SUBJECTS[subjId];
+  const questions = variant.questions;
+  const q = questions[currentIndex];
+  const answeredCount = Object.keys(answers).length;
+  const progressPct = Math.round((answeredCount / questions.length) * 100);
+  const typeMeta = TYPE_LABELS[q.type] || { label: q.type, color: '#6366f1' };
+
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="animate-fade space-y-4">
+      <!-- Top Bar -->
+      <div class="surface-card rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <button type="button" id="exitTestBtn" class="px-3 py-1.5 rounded-xl surface-card2 hover:border-rose-500/60 text-xs font-bold transition">
+            ← Chiqish
+          </button>
+          <div>
+            <div class="font-extrabold text-base sm:text-lg flex items-center gap-2">
+              <span>${subj.icon} ${subj.name}</span>
+              <span class="text-indigo-400">· ${variantTitle(varId)}</span>
+            </div>
+            <div class="text-xs text-muted">
+              O'quvchi: <b>${esc(currentUser ? currentUser.name : '')}</b> · Belgilandi: <b>${answeredCount}/${questions.length}</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="surface-card2 px-3.5 py-2 rounded-xl flex items-center gap-2">
+            <span class="text-xs text-muted font-semibold">⏱ Vaqt:</span>
+            <span id="liveTimerText" class="tabular-nums font-extrabold text-base sm:text-lg ${secondsLeft < 300 ? 'text-rose-500' : ''}">
+              ${mmss(secondsLeft)}
+            </span>
+          </div>
+          <button type="button" id="topFinishBtn" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold transition shadow-md">
+            Yakunlash ✓
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="w-full h-2 surface-card2 rounded-full overflow-hidden">
+        <div class="h-full bg-gradient-to-r from-indigo-500 to-emerald-500 transition-all duration-300" style="width:${progressPct}%"></div>
+      </div>
+
+      <!-- Main Question Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <!-- Left 8 cols: Question Image & Options -->
+        <div class="lg:col-span-8 surface-card rounded-2xl p-4 sm:p-6 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-lg bg-indigo-600 text-white font-extrabold text-sm">
+                ${q.n}-savol / ${questions.length}
+              </span>
+              <span class="px-2.5 py-1 rounded-lg text-xs font-bold" style="background:${typeMeta.color}22;color:${typeMeta.color}">
+                ${typeMeta.label}
+              </span>
+            </div>
+            <span class="px-3 py-1 rounded-lg surface-card2 text-xs sm:text-sm font-extrabold text-emerald-400">
+              +${fmtScore(q.pts)} ball
+            </span>
+          </div>
+
+          <!-- Question Image(s) -->
+          <div class="q-image-box space-y-2">
+            ${q.img.map(imgFile => `
+              <img src="${getImgSrc(subjId, imgFile)}" alt="${q.n}-savol" data-zoom-src="${getImgSrc(subjId, imgFile)}">
+            `).join('')}
+          </div>
+          <div class="text-[11px] text-muted text-right">🔍 Rasm ustiga bosib kattalashtirishingiz mumkin · Klaviatura: A, B, C, D</div>
+
+          <!-- ABCD Options -->
+          <div>
+            <div class="text-xs font-bold uppercase tracking-wider text-muted mb-2.5">Javob variantini belgilang:</div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              ${['A', 'B', 'C', 'D'].map(letter => {
+                const selected = answers[q.n] === letter;
+                return `
+                  <button type="button" data-pick-opt="${letter}"
+                    class="py-3.5 px-4 rounded-xl font-extrabold text-lg transition flex items-center justify-center gap-2 border-2 ${
+                      selected
+                        ? 'border-indigo-500 bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 scale-[1.02]'
+                        : 'surface-card2 hover:border-indigo-400'
+                    }">
+                    <span>${letter}</span>
+                    ${selected ? '<span class="text-sm">✓</span>' : ''}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- Prev / Next Navigation -->
+          <div class="flex items-center justify-between pt-3 border-t border-subtle">
+            <button type="button" id="prevQBtn" ${currentIndex === 0 ? 'disabled' : ''}
+              class="px-4 py-2.5 rounded-xl surface-card2 font-bold text-sm disabled:opacity-40 hover:border-indigo-400 transition">
+              ← Oldingi savol
+            </button>
+            ${currentIndex < questions.length - 1 ? `
+              <button type="button" id="nextQBtn" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition shadow-md">
+                Keyingi savol →
+              </button>
+            ` : `
+              <button type="button" id="bottomFinishBtn" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-md">
+                Testni yakunlash ✓
+              </button>
+            `}
+          </div>
+        </div>
+
+        <!-- Right 4 cols: Question Navigator Map -->
+        <div class="lg:col-span-4 surface-card rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-sm">Savollar xaritasi</span>
+            <span class="text-xs text-muted font-semibold">${answeredCount} / ${questions.length} javob berildi</span>
+          </div>
+
+          <div class="grid grid-cols-5 gap-2">
+            ${questions.map((item, idx) => {
+              const ans = answers[item.n];
+              const isCurrent = idx === currentIndex;
+              return `
+                <button type="button" data-jump-idx="${idx}"
+                  class="aspect-square rounded-xl font-bold text-xs flex flex-col items-center justify-center transition border ${
+                    isCurrent ? 'ring-2 ring-indigo-400 border-indigo-400' : 'border-subtle'
+                  } ${
+                    ans ? 'bg-indigo-600 text-white' : 'surface-card2 hover:border-indigo-400'
+                  }">
+                  <span>${item.n}</span>
+                  <span class="text-[10px] opacity-80">${ans || '·'}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="pt-2 border-t border-subtle space-y-2 text-xs text-muted">
+            <div class="flex items-center justify-between">
+              <span>Jami maksimal ball:</span>
+              <b class="text-white">${fmtScore(questions.reduce((a, x) => a + x.pts, 0))} ball</b>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>Belgilanmagan savollar:</span>
+              <b class="text-amber-400">${questions.length - answeredCount} ta</b>
+            </div>
+          </div>
+
+          <button type="button" id="sideFinishBtn" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-600/20">
+            🏁 Testni yakunlash va natijani ko'rish
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Wire Question Screen Controls
+  document.getElementById('exitTestBtn').addEventListener('click', async () => {
+    const ok = await openConfirmModal({
+      title: 'Testdan chiqasizmi?',
+      message: 'Agar hozir chiqsangiz, belgilangan javoblaringiz yakunlanmaydi.',
+      confirmText: 'Ha, chiqish',
+      cancelText: 'Testga qaytish',
+      danger: true
+    });
+    if (ok) navigate(`s/${subjId}`);
+  });
+
+  document.querySelectorAll('[data-zoom-src]').forEach(img => {
+    img.addEventListener('click', () => openZoomModal(img.getAttribute('data-zoom-src')));
+  });
+
+  document.querySelectorAll('[data-pick-opt]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const letter = btn.getAttribute('data-pick-opt');
+      if (activeTest.answers[q.n] === letter) {
+        delete activeTest.answers[q.n];
+      } else {
+        activeTest.answers[q.n] = letter;
+      }
+      renderQuestionScreen();
+    });
+  });
+
+  const prevBtn = document.getElementById('prevQBtn');
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (activeTest.currentIndex > 0) {
+        activeTest.currentIndex--;
+        renderQuestionScreen();
+      }
+    });
+  }
+  const nextBtn = document.getElementById('nextQBtn');
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      if (activeTest.currentIndex < questions.length - 1) {
+        activeTest.currentIndex++;
+        renderQuestionScreen();
+      }
+    });
+  }
+
+  document.querySelectorAll('[data-jump-idx]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTest.currentIndex = Number(btn.getAttribute('data-jump-idx'));
+      renderQuestionScreen();
+    });
+  });
+
+  ['topFinishBtn', 'bottomFinishBtn', 'sideFinishBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', () => finishActiveTest(true));
+  });
+}
+
+async function finishActiveTest(askConfirmation = true) {
+  if (!activeTest || activeTest.finished) return;
+  const { subjId, varId, variant, answers } = activeTest;
+  const unanswered = variant.questions.length - Object.keys(answers).length;
+
+  if (askConfirmation) {
+    const ok = await openConfirmModal({
+      title: 'Testni yakunlaysizmi?',
+      message: unanswered > 0
+        ? `Sizda hali ${unanswered} ta savol belgilangan emas. Shunga qaramay testni yakunlab natijani ko'rasizmi?`
+        : 'Barcha savollarga javob belgiladingiz. Testni yakunlab natija va tahlilni ko\'rasizmi?',
+      confirmText: 'Ha, yakunlash ✓',
+      cancelText: 'Tekshirib olish'
+    });
+    if (!ok) return;
+  }
+
+  activeTest.finished = true;
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  const subj = SUBJECTS[subjId];
+  const timeSpent = Math.min(
+    Math.max(1, Math.floor((Date.now() - activeTest.startedAt) / 1000)),
+    subj.minutes * 60
+  );
+
+  let score = 0;
+  let correct = 0;
+  let wrong = 0;
+  let skipped = 0;
+
+  for (const q of variant.questions) {
+    const userAns = answers[q.n];
+    if (!userAns) {
+      skipped++;
+    } else if (userAns === q.ans) {
+      correct++;
+      score += q.pts;
+    } else {
+      wrong++;
+    }
+  }
+
+  const totalPts = variant.questions.reduce((a, q) => a + q.pts, 0);
+  const saveWhere = await saveTestResult({
+    name: currentUser ? currentUser.name : 'Mehmon O\'quvchi',
+    subject: subjId,
+    variant: varId,
+    score: Math.round(score * 100) / 100,
+    total: totalPts,
+    correct,
+    wrong,
+    skipped,
+    time: timeSpent
+  });
+
+  activeTest.summary = {
+    score,
+    totalPts,
+    correct,
+    wrong,
+    skipped,
+    timeSpent,
+    saveWhere
+  };
+
+  showToast(`Natija saqlandi: ${fmtScore(score)} / ${fmtScore(totalPts)} ball!`, 'ok');
+  renderTestResultScreen();
+}
+
+// ----------------------------------------------------------------------------
+// VIEW 4: TEST RESULTS & DETAILED QUESTION-BY-QUESTION REVIEW
+// ----------------------------------------------------------------------------
+function renderTestResultScreen() {
+  if (!activeTest || !activeTest.summary) return;
+  const { subjId, varId, variant, answers, summary, reviewFilter, expandAll } = activeTest;
+  const { score, totalPts, correct, wrong, skipped, timeSpent, saveWhere } = summary;
+  const subj = SUBJECTS[subjId];
+  const pct = Math.round((score / totalPts) * 100);
+  const ringColor = pct >= 75 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#ef4444';
+  const gradeLabel = pct >= 85 ? 'A\'lo (5)' : pct >= 70 ? 'Yaxshi (4)' : pct >= 50 ? 'Qoniqarli (3)' : 'Qo\'shimcha tayyorgarlik kerak';
+
+  const filteredQuestions = variant.questions.filter(q => {
+    const a = answers[q.n];
+    const st = !a ? 'skip' : a === q.ans ? 'ok' : 'bad';
+    if (reviewFilter === 'bad') return st === 'bad';
+    if (reviewFilter === 'ok') return st === 'ok';
+    if (reviewFilter === 'skip') return st === 'skip';
+    return true;
+  });
+
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="animate-fade space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <button type="button" id="resBackSubjBtn" class="text-xs font-bold text-indigo-400 hover:underline mb-1">
+            ← ${subj.name} variantlariga qaytish
+          </button>
+          <h1 class="text-2xl sm:text-3xl font-extrabold">
+            📊 Test natijasi — ${subj.icon} ${subj.name} (${variantTitle(varId)})
+          </h1>
+          <p class="text-xs sm:text-sm text-muted mt-0.5">
+            O'quvchi: <b>${esc(currentUser ? currentUser.name : '')}</b> · Holat:
+            <span class="text-emerald-400 font-semibold">
+              ${saveWhere === 'server' ? '✓ Serverdagi results/' + subjId + '.json va brauzer xotirasiga saqlandi' : '✓ Reytingga saqlandi (quyidagi tugma orqali ' + subjId + '.json faylini yuklab olishingiz mumkin)'}
+            </span>
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" id="resDownloadJsonBtn" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-bold transition shadow-md">
+            📥 ${subjId}.json faylga yuklab olish
+          </button>
+          <button type="button" id="resOpenRatingBtn" class="px-4 py-2.5 rounded-xl surface-card2 hover:border-indigo-400 text-xs sm:text-sm font-bold transition">
+            🏆 Fan reytingi
+          </button>
+        </div>
+      </div>
+
+      <!-- Score Summary Card -->
+      <div class="surface-card rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex flex-col sm:flex-row items-center gap-6">
+          <div class="score-ring" style="--pct:${pct};--ring-color:${ringColor}">
+            <div class="score-ring-inner">
+              <span class="text-3xl font-extrabold">${pct}%</span>
+              <span class="text-xs text-muted font-bold mt-0.5">${fmtScore(score)} / ${fmtScore(totalPts)} ball</span>
+            </div>
+          </div>
+          <div class="space-y-2 text-center sm:text-left">
+            <div class="inline-block px-3 py-1 rounded-full text-xs font-extrabold" style="background:${ringColor}22;color:${ringColor}">
+              ${gradeLabel}
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold">
+              To'plangan ball: <span style="color:${ringColor}">${fmtScore(score)}</span> / ${fmtScore(totalPts)}
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2">
+              <div class="surface-card2 rounded-xl px-3.5 py-2.5 text-center">
+                <div class="text-lg font-extrabold text-emerald-400">✓ ${correct}</div>
+                <div class="text-[11px] text-muted font-semibold">To'g'ri</div>
+              </div>
+              <div class="surface-card2 rounded-xl px-3.5 py-2.5 text-center">
+                <div class="text-lg font-extrabold text-rose-400">✗ ${wrong}</div>
+                <div class="text-[11px] text-muted font-semibold">Xato</div>
+              </div>
+              <div class="surface-card2 rounded-xl px-3.5 py-2.5 text-center">
+                <div class="text-lg font-extrabold text-amber-400">— ${skipped}</div>
+                <div class="text-[11px] text-muted font-semibold">Belgilanmagan</div>
+              </div>
+              <div class="surface-card2 rounded-xl px-3.5 py-2.5 text-center">
+                <div class="text-lg font-extrabold tabular-nums">⏱ ${mmss(timeSpent)}</div>
+                <div class="text-[11px] text-muted font-semibold">Sarflangan vaqt</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2.5 w-full md:w-auto">
+          <button type="button" id="retryVariantBtn" class="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-md">
+            🔄 Shu variantni qayta yechish
+          </button>
+          <button type="button" id="otherVariantBtn" class="px-5 py-2.5 rounded-xl surface-card2 hover:border-indigo-400 font-semibold text-sm transition">
+            🗂️ Boshqa variant tanlash
+          </button>
+          <button type="button" id="goHomeFromResBtn" class="px-5 py-2.5 rounded-xl surface-card2 hover:border-indigo-400 font-semibold text-sm transition">
+            🏠 Bosh sahifa reytingi
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Overview Matrix of All Questions -->
+      <div class="surface-card rounded-2xl p-5">
+        <div class="text-xs font-bold uppercase tracking-wider text-muted mb-3">
+          Savollar bo'yicha qisqacha xarita (savol raqamini bossangiz tahlilga o'tadi):
+        </div>
+        <div class="flex flex-wrap gap-2">
+          ${variant.questions.map(q => {
+            const a = answers[q.n];
+            const st = !a ? 'skip' : a === q.ans ? 'ok' : 'bad';
+            const cls = st === 'ok'
+              ? 'bg-emerald-600 text-white'
+              : st === 'bad'
+              ? 'bg-rose-600 text-white'
+              : 'surface-card2 text-muted';
+            return `
+              <button type="button" data-scroll-q="${q.n}" class="px-3 py-2 rounded-xl text-xs font-extrabold transition hover:scale-105 ${cls}">
+                <div>#${q.n}</div>
+                <div class="text-[10px] opacity-90">${a || '—'} ${st === 'bad' ? '→ ' + q.ans : ''}</div>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- Detailed Question-by-Question Review Header & Filters -->
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <h2 class="text-xl font-extrabold">🔍 Har bir savol tahlili va yechimi</h2>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" data-rf="all" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${reviewFilter === 'all' ? 'bg-indigo-600 text-white' : 'surface-card2'}">
+              Barchasi (${variant.questions.length})
+            </button>
+            <button type="button" data-rf="bad" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${reviewFilter === 'bad' ? 'bg-rose-600 text-white' : 'surface-card2'}">
+              ✗ Xatolar (${wrong})
+            </button>
+            <button type="button" data-rf="ok" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${reviewFilter === 'ok' ? 'bg-emerald-600 text-white' : 'surface-card2'}">
+              ✓ To'g'rilar (${correct})
+            </button>
+            <button type="button" data-rf="skip" class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${reviewFilter === 'skip' ? 'bg-amber-600 text-white' : 'surface-card2'}">
+              — Belgilanmagan (${skipped})
+            </button>
+            <button type="button" id="toggleExpandAllBtn" class="px-3 py-1.5 rounded-xl surface-card2 hover:border-indigo-400 text-xs font-semibold transition">
+              ${expandAll ? '▲ Barchasini yig\'ish' : '▼ Barchasini ochish'}
+            </button>
+          </div>
+        </div>
+
+        <!-- Review Cards List -->
+        <div class="space-y-4" id="reviewListContainer">
+          ${filteredQuestions.length ? filteredQuestions.map(q => {
+            const a = answers[q.n];
+            const st = !a ? 'skip' : a === q.ans ? 'ok' : 'bad';
+            const borderCls = st === 'ok' ? 'border-l-4 border-l-emerald-500' : st === 'bad' ? 'border-l-4 border-l-rose-500' : 'border-l-4 border-l-amber-500';
+            const badgeHtml = st === 'ok'
+              ? '<span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-extrabold">✓ To\'g\'ri</span>'
+              : st === 'bad'
+              ? '<span class="px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-400 text-xs font-extrabold">✗ Xato</span>'
+              : '<span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-extrabold">— Belgilanmagan</span>';
+
+            return `
+              <div id="reviewCard_${q.n}" class="surface-card rounded-2xl overflow-hidden ${borderCls}">
+                <button type="button" data-toggle-review="${q.n}" class="w-full p-4 flex flex-wrap items-center justify-between gap-3 text-left hover:bg-white/5 transition">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <span class="font-extrabold text-base">#${q.n}-savol</span>
+                    ${badgeHtml}
+                    <span class="text-xs sm:text-sm">
+                      Sizning javobingiz: <b class="${st === 'ok' ? 'text-emerald-400' : 'text-rose-400'}">${a || 'Belgilanmagan'}</b>
+                      · To'g'ri javob: <b class="text-emerald-400">${q.ans}</b>
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span class="text-xs font-bold ${st === 'ok' ? 'text-emerald-400' : 'text-muted'}">
+                      ${st === 'ok' ? '+' + fmtScore(q.pts) : '0'} / ${fmtScore(q.pts)} ball
+                    </span>
+                    <span class="text-xs text-muted">▾</span>
+                  </div>
+                </button>
+
+                <div id="reviewBody_${q.n}" class="${expandAll ? 'block' : 'hidden'} p-4 pt-0 border-t border-subtle space-y-4">
+                  <div class="pt-3">
+                    <div class="text-xs font-bold uppercase tracking-wider text-muted mb-2">📝 Savol sharti:</div>
+                    <div class="q-image-box space-y-2">
+                      ${q.img.map(f => `<img src="${getImgSrc(subjId, f)}" alt="${q.n}-savol" loading="lazy" data-zoom-src="${getImgSrc(subjId, f)}">`).join('')}
+                    </div>
+                  </div>
+                  <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">💡 To'g'ri yechim va izoh (Javob: ${q.ans}):</div>
+                    <div class="q-image-box space-y-2">
+                      ${q.exp.map(f => `<img src="${getImgSrc(subjId, f)}" alt="${q.n}-yechim" loading="lazy" data-zoom-src="${getImgSrc(subjId, f)}">`).join('')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('') : `
+            <div class="surface-card rounded-2xl p-8 text-center text-muted text-sm">
+              Ushbu filtr bo'yicha savollar topilmadi.
+            </div>
+          `}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Wire Result Screen Controls
+  document.getElementById('resBackSubjBtn').addEventListener('click', () => navigate(`s/${subjId}`));
+  document.getElementById('resDownloadJsonBtn').addEventListener('click', () => exportSubjectJson(subjId));
+  document.getElementById('resOpenRatingBtn').addEventListener('click', () => navigate(`r/${subjId}`));
+  document.getElementById('retryVariantBtn').addEventListener('click', () => startTestSession(subjId, varId));
+  document.getElementById('otherVariantBtn').addEventListener('click', () => navigate(`s/${subjId}`));
+  document.getElementById('goHomeFromResBtn').addEventListener('click', () => {
+    homeLeaderboardSubject = subjId;
+    navigate('');
+  });
+
+  document.querySelectorAll('[data-rf]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTest.reviewFilter = btn.getAttribute('data-rf');
+      renderTestResultScreen();
+    });
+  });
+
+  document.getElementById('toggleExpandAllBtn').addEventListener('click', () => {
+    activeTest.expandAll = !activeTest.expandAll;
+    renderTestResultScreen();
+  });
+
+  document.querySelectorAll('[data-toggle-review]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qn = btn.getAttribute('data-toggle-review');
+      const bodyEl = document.getElementById(`reviewBody_${qn}`);
+      if (bodyEl) bodyEl.classList.toggle('hidden');
+    });
+  });
+
+  document.querySelectorAll('[data-scroll-q]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qn = btn.getAttribute('data-scroll-q');
+      if (activeTest.reviewFilter !== 'all') {
+        activeTest.reviewFilter = 'all';
+        renderTestResultScreen();
+      }
+      const cardEl = document.getElementById(`reviewCard_${qn}`);
+      const bodyEl = document.getElementById(`reviewBody_${qn}`);
+      if (bodyEl) bodyEl.classList.remove('hidden');
+      if (cardEl) cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+  document.querySelectorAll('[data-zoom-src]').forEach(img => {
+    img.addEventListener('click', () => openZoomModal(img.getAttribute('data-zoom-src')));
+  });
+}
+
+// ----------------------------------------------------------------------------
+// VIEW 5: DEDICATED SUBJECT RATING PAGE
+// ----------------------------------------------------------------------------
+function renderRatingView(subjId) {
+  const subj = SUBJECTS[subjId];
+  const variants = getSubjectData(subjId);
+  const rs = resultsCache[subjId] || [];
+  let selectedVar = '';
+  let searchQuery = '';
+
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="animate-fade space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <button type="button" id="ratingBackHomeBtn" class="text-xs font-bold text-indigo-400 hover:underline mb-1">
+            ← Bosh sahifaga qaytish
+          </button>
+          <h1 class="text-2xl sm:text-3xl font-extrabold flex items-center gap-2">
+            <span>🏆 ${subj.icon} ${subj.name} — Top Reyting</span>
+          </h1>
+          <p class="text-sm text-muted mt-0.5">
+            Jami saqlangan urinishlar: <b>${rs.length} ta</b>. Reytingda har bir o'quvchining eng yaxshi natijasi ko'rinadi.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" id="ratingExportBtn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-bold transition">
+            📥 ${subjId}.json yuklab olish
+          </button>
+          <button type="button" id="ratingImportBtn" class="px-4 py-2 rounded-xl surface-card2 hover:border-indigo-400 text-xs sm:text-sm font-semibold transition">
+            📤 JSON yuklash
+          </button>
+          <button type="button" id="ratingOpenTestsBtn" class="px-4 py-2 rounded-xl surface-card2 hover:border-indigo-400 text-xs sm:text-sm font-semibold transition">
+            📝 Variantlarni yechish
+          </button>
+        </div>
+      </div>
+
+      <div class="surface-card rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="ratingVarSelect" class="surface-card2 rounded-xl px-3.5 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="">Barcha variantlar</option>
+              ${variants.map(v => `<option value="${v.id}">${variantTitle(v.id)}</option>`).join('')}
+            </select>
+            <input id="ratingSearchInput" type="text" placeholder="Ism yoki familiya bo'yicha qidirish..."
+              class="surface-card2 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64 max-w-full">
+          </div>
+          <div class="flex flex-wrap gap-2">
+            ${Object.values(SUBJECTS).map(s => `
+              <button type="button" data-switch-rating="${s.id}"
+                class="px-3 py-1.5 rounded-xl text-xs font-bold transition ${s.id === subjId ? 'bg-indigo-600 text-white' : 'surface-card2 hover:border-indigo-400'}">
+                ${s.icon} ${s.name}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-subtle">
+          <table class="w-full text-left border-collapse text-sm">
+            <thead>
+              <tr class="surface-card2 text-muted text-xs uppercase">
+                <th class="py-3 px-4 font-bold">#</th>
+                <th class="py-3 px-4 font-bold">Ism va Familiya</th>
+                <th class="py-3 px-4 font-bold">Ball</th>
+                <th class="py-3 px-4 font-bold">Foiz</th>
+                <th class="py-3 px-4 font-bold">To'g'ri / Xato / Bo'sh</th>
+                <th class="py-3 px-4 font-bold">Variant</th>
+                <th class="py-3 px-4 font-bold">Vaqt</th>
+                <th class="py-3 px-4 font-bold">Sana</th>
+              </tr>
+            </thead>
+            <tbody id="ratingTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const drawTable = () => {
+    const board = computeLeaderboard(resultsCache[subjId] || [], selectedVar, searchQuery).slice(0, 100);
+    const tbody = document.getElementById('ratingTableBody');
+    if (!tbody) return;
+    if (!board.length) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" class="py-10 px-4 text-center text-muted">
+            Hozircha natijalar topilmadi.
+          </td>
+        </tr>
+      `;
+      return;
+    }
+    tbody.innerHTML = board.map((r, i) => {
+      const isMe = currentUser && r.name.toLowerCase() === currentUser.name.toLowerCase();
+      const pct = Math.round((r.score / r.total) * 100);
+      return `
+        <tr class="border-t border-subtle ${isMe ? 'bg-indigo-500/10 font-semibold' : ''}">
+          <td class="py-3 px-4 font-bold">${['🥇 1', '🥈 2', '🥉 3'][i] || (i + 1)}</td>
+          <td class="py-3 px-4 font-bold">${esc(r.name)} ${isMe ? '<span class="text-xs text-indigo-400">(Siz)</span>' : ''}</td>
+          <td class="py-3 px-4 font-extrabold text-indigo-400">${fmtScore(r.score)} / ${fmtScore(r.total)}</td>
+          <td class="py-3 px-4">
+            <span class="px-2.5 py-1 rounded-full text-xs font-bold ${pct >= 75 ? 'bg-emerald-500/20 text-emerald-400' : pct >= 50 ? 'bg-amber-500/20 text-amber-400' : 'bg-rose-500/20 text-rose-400'}">
+              ${pct}%
+            </span>
+          </td>
+          <td class="py-3 px-4 text-xs">
+            <span class="text-emerald-400 font-bold">✓ ${r.correct}</span> ·
+            <span class="text-rose-400 font-bold">✗ ${r.wrong}</span> ·
+            <span class="text-muted">— ${r.skipped || 0}</span>
+          </td>
+          <td class="py-3 px-4 text-xs font-semibold">${variantTitle(r.variant)}</td>
+          <td class="py-3 px-4 tabular-nums text-xs">${mmss(r.time)}</td>
+          <td class="py-3 px-4 text-xs text-muted">${esc((r.date || '').slice(0, 16))}</td>
+        </tr>
+      `;
+    }).join('');
+  };
+
+  document.getElementById('ratingBackHomeBtn').addEventListener('click', () => navigate(''));
+  document.getElementById('ratingExportBtn').addEventListener('click', () => exportSubjectJson(subjId));
+  document.getElementById('ratingImportBtn').addEventListener('click', () => triggerImportJson(subjId));
+  document.getElementById('ratingOpenTestsBtn').addEventListener('click', () => navigate(`s/${subjId}`));
+  document.getElementById('ratingVarSelect').addEventListener('change', e => {
+    selectedVar = e.target.value;
+    drawTable();
+  });
+  document.getElementById('ratingSearchInput').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    drawTable();
+  });
+  document.querySelectorAll('[data-switch-rating]').forEach(btn => {
+    btn.addEventListener('click', () => navigate(`r/${btn.getAttribute('data-switch-rating')}`));
+  });
+
+  drawTable();
+}
+
+// ============================================================================
+// 5. GLOBAL EVENT LISTENERS (Header, Keyboard Navigation, JSON Import, Zoom)
+// ============================================================================
+document.getElementById('brandHomeBtn').addEventListener('click', () => navigate(''));
+document.getElementById('navHomeBtn').addEventListener('click', () => navigate(''));
+document.getElementById('navJsonBtn').addEventListener('click', openJsonManagerModal);
+
+document.getElementById('themeToggleBtn').addEventListener('click', () => {
+  const htmlEl = document.documentElement;
+  if (htmlEl.classList.contains('light')) {
+    htmlEl.classList.remove('light');
+    htmlEl.classList.add('dark');
+    safeSetStorage('chsb_theme', 'dark');
+  } else {
+    htmlEl.classList.remove('dark');
+    htmlEl.classList.add('light');
+    safeSetStorage('chsb_theme', 'light');
+  }
+});
+
+// Restore saved theme
+if (safeGetStorage('chsb_theme', 'dark') === 'light') {
+  document.documentElement.classList.remove('dark');
+  document.documentElement.classList.add('light');
+}
+
+// Zoom modal close
+document.getElementById('zoomModal').addEventListener('click', () => {
+  const zm = document.getElementById('zoomModal');
+  zm.classList.add('hidden');
+  zm.classList.remove('flex');
+});
+document.getElementById('closeZoomBtn').addEventListener('click', e => {
+  e.stopPropagation();
+  const zm = document.getElementById('zoomModal');
+  zm.classList.add('hidden');
+  zm.classList.remove('flex');
+});
+
+// JSON Import Handler
+document.getElementById('jsonFileInput').addEventListener('change', async e => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const parsed = JSON.parse(text);
+    let importedCount = 0;
+
+    const mergeSubjectArray = (subj, arr) => {
+      if (!SUBJECTS[subj] || !Array.isArray(arr)) return;
+      const existing = resultsCache[subj] || safeGetStorage(`chsb_results_${subj}`, []);
+      const combined = [...existing, ...arr];
+      safeSetStorage(`chsb_results_${subj}`, combined);
+      safeSetStorage(`local_${subj}`, combined);
+      importedCount += arr.length;
+    };
+
+    if (Array.isArray(parsed)) {
+      const targetSubj = currentImportSubject || (parsed[0] && parsed[0].subject) || homeLeaderboardSubject || 'fizika';
+      mergeSubjectArray(targetSubj, parsed);
+    } else if (parsed && typeof parsed === 'object') {
+      for (const s of Object.keys(SUBJECTS)) {
+        if (Array.isArray(parsed[s])) {
+          mergeSubjectArray(s, parsed[s]);
+        }
+      }
+    }
+
+    await loadAllResults();
+    showToast(`${importedCount} ta natija JSON fayldan muvaffaqiyatli yuklandi!`, 'ok');
+    handleRoute();
+  } catch (err) {
+    showToast('JSON faylni o\'qishda xatolik yuz berdi. Fayl formatini tekshiring.', 'err');
+  }
+});
+
+// Keyboard shortcuts during active test
+window.addEventListener('keydown', e => {
+  const modalOpen = !document.getElementById('modalRoot').classList.contains('hidden');
+  const zoomOpen = !document.getElementById('zoomModal').classList.contains('hidden');
+  if (zoomOpen && e.key === 'Escape') {
+    document.getElementById('zoomModal').click();
+    return;
+  }
+  if (modalOpen || !activeTest || activeTest.finished) return;
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
+
+  const key = e.key.toUpperCase();
+  const q = activeTest.variant.questions[activeTest.currentIndex];
+  if (['A', 'B', 'C', 'D'].includes(key) && key.length === 1) {
+    if (activeTest.answers[q.n] === key) delete activeTest.answers[q.n];
+    else activeTest.answers[q.n] = key;
+    renderQuestionScreen();
+  } else if (e.key === 'ArrowRight') {
+    if (activeTest.currentIndex < activeTest.variant.questions.length - 1) {
+      activeTest.currentIndex++;
+      renderQuestionScreen();
+    }
+  } else if (e.key === 'ArrowLeft') {
+    if (activeTest.currentIndex > 0) {
+      activeTest.currentIndex--;
+      renderQuestionScreen();
+    }
+  }
+});
+
+window.addEventListener('hashchange', handleRoute);
+
+// Initialize App
+renderHeaderUser();
+openNameModal(false).then(() => handleRoute());
+</script>
+</body>
+</html>
